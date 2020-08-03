@@ -5,8 +5,12 @@
  * @LastEditTime: 2020-08-02 22:51:15
  */
 import 'package:dolphin_read/page/login/flare_sign_page.dart';
+import 'package:dolphin_read/routers/application.dart';
+import 'package:dolphin_read/routers/routes.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,8 +19,13 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
+    final router = Router();
+    Routes.configRoutes(router);
+    Application.router = router;
     return MaterialApp(
       title: 'Flutter Demo',
+      onGenerateRoute: Application.router.generator,
       builder: BotToastInit(),
       theme: ThemeData( 
         primarySwatch: Colors.blue,

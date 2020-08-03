@@ -26,3 +26,7 @@ double duSetHeight(double height) {
 double duSetFontSize(double fontSize) {
   return ScreenUtil().setSp(fontSize);
 }
+
+double getStatusBarHeight(){
+  return ScreenUtil.statusBarHeight;
+}

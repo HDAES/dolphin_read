@@ -4,11 +4,13 @@
  * @Date: 2020-08-02 22:35:57
  * @LastEditTime: 2020-08-02 23:09:57
  */
+import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:dolphin_read/page/login/flare_sign_in_controller.dart';
 import 'package:dolphin_read/page/login/signin_button.dart';
 import 'package:dolphin_read/page/login/tracking_text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 
 class FlareSignPage extends StatefulWidget {
   @override
@@ -26,6 +28,7 @@ class _FlareSignPageState extends State<FlareSignPage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,width: 750, height: 1334);
     return Scaffold(
       body: Theme(
         data: Theme.of(context).copyWith(
@@ -83,7 +86,7 @@ class _FlareSignPageState extends State<FlareSignPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 TrackingTextInput(
-                                  label: 'accout',
+                                  label: 'Accout',
                                   hint: '账号',
                                   onCaretMoved: (Offset caret) {
                                     _signInController.lookAt(caret);
@@ -91,7 +94,7 @@ class _FlareSignPageState extends State<FlareSignPage> {
                                 ),
                                 TrackingTextInput(
                                   label: 'Password',
-                                  hint: 'Try bears',
+                                  hint: '密码',
                                   isObscured: true,
                                   onCaretMoved: (Offset caret) {
                                     _signInController.coverEyes(caret != null);
@@ -121,6 +124,19 @@ class _FlareSignPageState extends State<FlareSignPage> {
                       ),
                     ),
                   ],
+                ),
+              ),
+              Positioned(
+                top:getStatusBarHeight()+10,
+                right: 10,
+                child: GestureDetector(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text('跳过',style: TextStyle(fontSize: duSetFontSize(36),color: Colors.white)),
+                      Icon(Icons.arrow_forward,color: Colors.white)
+                    ],
+                  ),
                 ),
               )
             ],

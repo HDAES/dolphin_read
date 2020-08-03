@@ -22,6 +22,8 @@ dependencies:
   dio_http_cache: ^0.2.8
   # 轻提示
   bot_toast: ^3.0.1
+  # 路由
+  fluro: ^1.6.3
 
 dev_dependencies:
   flutter_test:
