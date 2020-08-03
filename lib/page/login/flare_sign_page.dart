@@ -55,8 +55,8 @@ class _FlareSignPageState extends State<FlareSignPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      height: 200,
-                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                      height: 160,
+                      alignment: Alignment.bottomCenter,
                       child: FlareActor(
                         'assets/Teddy.flr',
                         shouldClip: false,
