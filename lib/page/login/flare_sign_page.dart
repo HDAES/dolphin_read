@@ -5,6 +5,7 @@
  * @LastEditTime: 2020-08-02 23:09:57
  */
 import 'package:dolphin_read/common/utils/utils.dart';
+import 'package:dolphin_read/routers/routes.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:dolphin_read/page/login/flare_sign_in_controller.dart';
 import 'package:dolphin_read/page/login/signin_button.dart';
@@ -130,6 +131,7 @@ class _FlareSignPageState extends State<FlareSignPage> {
                 top:getStatusBarHeight()+10,
                 right: 10,
                 child: GestureDetector(
+                  onTap: ()=>{Routes.navigateTo(context, Routes.selectGender)},
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
