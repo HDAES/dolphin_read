@@ -24,6 +24,8 @@ dependencies:
   bot_toast: ^3.0.1
   # 路由
   fluro: ^1.6.3
+  # 底部导航
+  convex_bottom_bar: ^2.3.0
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-03 20:36:33
+ * @LastEditTime: 2020-08-03 22:15:39
+ */
 import 'package:dolphin_read/routers/application.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +13,8 @@ class Routes {
   static Router router;
 
   static String selectGender = '/selectGender';
+  static String selectTags = '/selectTags';
+  static String index = '/index';
 
    static void configRoutes(Router router){
     router.notFoundHandler = new Handler(
@@ -17,6 +25,8 @@ class Routes {
     );
 
     router.define(selectGender, handler: selectGenderHandler);   //选择性别
+    router.define(selectTags, handler: selectTagsHandler);   //选择性别
+    router.define(index, handler: indexHandler);   //选择性别
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配

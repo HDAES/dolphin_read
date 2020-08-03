@@ -1,5 +1,13 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-03 20:36:33
+ * @LastEditTime: 2020-08-03 22:15:17
+ */
+import 'package:dolphin_read/page/index_page.dart';
 import 'package:dolphin_read/page/login/flare_sign_page.dart';
 import 'package:dolphin_read/page/user_config/user_select_gender_page.dart';
+import 'package:dolphin_read/page/user_config/user_select_tag_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 
@@ -14,5 +22,19 @@ Handler loginHandler = Handler(
 Handler selectGenderHandler = Handler(
   handlerFunc: (BuildContext context, Map<String,List<String>> params){
     return UserSelectGenderPage();
+  }
+);
+
+//标签选择
+Handler selectTagsHandler = Handler(
+  handlerFunc: (BuildContext context, Map<String,List<String>> params){
+    return UserSelectTagsPage();
+  }
+);
+
+//首页
+Handler indexHandler = Handler(
+  handlerFunc: (BuildContext context, Map<String,List<String>> params){
+    return IndexPage();
   }
 );
