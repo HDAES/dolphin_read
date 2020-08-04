@@ -11,10 +11,9 @@ class HttpUtil {
 
   static Dio dio;
 
-  static DioCacheManager _dioCacheManager;
   HttpUtil._internal() {
     BaseOptions options = new BaseOptions(
-      baseUrl: SERVER_API_URL,
+      baseUrl: SERVER_LOCAL_API_URL,
       connectTimeout: 10000,
       receiveTimeout: 5000,
       headers: {},
@@ -71,8 +70,6 @@ class HttpUtil {
     Options requestOptions = options ?? Options();
     requestOptions = requestOptions.merge(extra: {
       "context": context,
-      "refresh": refresh,
-      "noCache": noCache,
     });
     
     Map<String, dynamic> _authorization = getAuthorizationHeader();

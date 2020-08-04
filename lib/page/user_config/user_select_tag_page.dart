@@ -93,8 +93,9 @@ class _UserSelectTagsPageState extends State<UserSelectTagsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    Text('选择您的阅读偏好',style: TextStyle(fontSize: duSetFontSize(42),color: Colors.black87,fontWeight: FontWeight.bold)),
+                    Text('选择您的阅读偏好',style: TextStyle(fontSize: duSetFontSize(48),color: Colors.black87,fontWeight: FontWeight.bold)),
                     Text('(最多选择5个)',style: TextStyle(fontSize: duSetFontSize(28),color: Colors.black45))
                   ],
                 ),
