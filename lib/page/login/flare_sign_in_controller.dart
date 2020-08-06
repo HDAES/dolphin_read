@@ -1,6 +1,11 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:dolphin_read/common/apis/apis.dart';
+import 'package:dolphin_read/common/utils/utils.dart';
+import 'package:dolphin_read/common/widgets/toast.dart';
+import 'package:dolphin_read/model/user.dart';
+import 'package:dolphin_read/routers/routes.dart';
 import 'package:flare_flutter/flare.dart';
 import 'package:flare_flutter/flare_controls.dart';
 import 'package:flare_dart/math/mat2d.dart';
@@ -15,6 +20,7 @@ class FlareSignInController extends FlareControls {
   Vec2D _faceOriginLocal = Vec2D();
   bool _hasFocus = false;
   String _password;
+  String _accout;
   static const double _projectGaze = 60.0;
 
   @override
@@ -84,6 +90,10 @@ class FlareSignInController extends FlareControls {
     _password = value;
   }
 
+   void setAccout(String value) {
+    _accout = value;
+  }
+  
   bool _isCoveringEyes = false;
   coverEyes(cover) {
     if (_isCoveringEyes == cover) {
@@ -97,11 +107,30 @@ class FlareSignInController extends FlareControls {
     }
   }
 
-  void submitPassword() {
-    if (_password == "bears") {
-      play("success");
-    } else {
+  void  submitPassword(context) async{
+    if(_isCoveringEyes){
+      play("hands_down");
+    }
+    if(checkAccout(_accout)&&checkPassWord(_password)){
+      UserModel respones = await UserApi.postLogin(context: context,params: {'username':_accout,'password':_password});
+      if(respones.code==200){
+        play("success");
+        if(respones.data.user.isRegister==0){
+          Toast.show('登录成功,完善信息');
+          Routes.navigateTo(context, Routes.selectGender);
+        }else{
+          Toast.show('登录成功');
+          Routes.navigateTo(context, Routes.index,clear: true);
+        }
+         
+      }else{
+         play("fail");
+         Toast.show(respones.message);
+         _isCoveringEyes = false;
+      }
+    }else{
       play("fail");
+      _isCoveringEyes = false;
     }
   }
 }

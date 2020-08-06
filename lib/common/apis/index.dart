@@ -8,6 +8,7 @@ class  IndexApi {
       '/api/novel/index/rotation',
       context: context
     );
+
     return IndexBanner.fromJson(response);
   }
 }

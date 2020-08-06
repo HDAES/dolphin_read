@@ -92,6 +92,9 @@ class _FlareSignPageState extends State<FlareSignPage> {
                                   onCaretMoved: (Offset caret) {
                                     _signInController.lookAt(caret);
                                   },
+                                  onTextChanged: (String value){
+                                    _signInController.setAccout(value);
+                                  },
                                 ),
                                 TrackingTextInput(
                                   label: 'Password',
@@ -114,7 +117,7 @@ class _FlareSignPageState extends State<FlareSignPage> {
                                   ),
                                   onPressed: () =>{
                                       //_signInController.setPassword('bears'),
-                                      _signInController.submitPassword(),
+                                      _signInController.submitPassword(context),
                                   }
                                       
                                 ),

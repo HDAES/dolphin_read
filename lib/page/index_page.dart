@@ -24,15 +24,12 @@ class _IndexPageState extends State<IndexPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.only(top:getStatusBarHeight()),
-        child: IndexedStack(
-          index: currentIndex,
-          children: <Widget>[
-            HomePage(),
-            Text('2'),
-          ],
-        ),
+      body: IndexedStack(
+        index: currentIndex,
+        children: <Widget>[
+          HomePage(),
+          Text('2'),
+        ],
       ),
       bottomNavigationBar: ConvexAppBar(
         items: [

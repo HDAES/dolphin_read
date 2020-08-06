@@ -1,4 +1,4 @@
-# dolphin_read
+# dolphinread
 
 A new Flutter application.
 

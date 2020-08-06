@@ -13,7 +13,7 @@ class HttpUtil {
 
   HttpUtil._internal() {
     BaseOptions options = new BaseOptions(
-      baseUrl: SERVER_LOCAL_API_URL,
+      baseUrl: SERVER_API_URL,
       connectTimeout: 10000,
       receiveTimeout: 5000,
       headers: {},
@@ -48,7 +48,7 @@ class HttpUtil {
   /// 添加头部信息
   Map<String, dynamic> getAuthorizationHeader() {
     var headers;
-    String token = Global.profile?.token;
+    String token = Global.profile?.data?.authorization;
     if (token != null) {
       headers = {
         'Authorization': 'Bearer $token',
@@ -86,6 +86,34 @@ class HttpUtil {
     return response.data;
   }
 
+
+  Future post(
+    String path,{
+      @required BuildContext context,
+      dynamic params,
+      Options options,
+      bool noCache = true,
+      bool refresh = false,
+    }
+  ) async {
+    Options requestOptions = options ?? Options();
+    requestOptions = requestOptions.merge(extra: {
+      "context": context,
+    });
+    
+    Map<String, dynamic> _authorization = getAuthorizationHeader();
+    if (_authorization != null) {
+      requestOptions = requestOptions.merge(headers: _authorization);
+    }
+    // if(refresh){
+    //   _dioCacheManager.delete(path);
+    // }
+    var response = await dio.post(path,
+        data: params,
+        options: buildCacheOptions(Duration(days: 7),options:requestOptions,forceRefresh:refresh)
+      );
+    return response.data;
+  }
 }
 
 //错误处理

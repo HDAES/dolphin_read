@@ -176,7 +176,7 @@ class _UserSelectTagsPageState extends State<UserSelectTagsPage> {
                 ),
                 Center(
                   child: GestureDetector(
-                    onTap: (){Toast.show('完成设置');Routes.navigateTo(context, Routes.index);},
+                    onTap: (){Toast.show('完成设置');Routes.navigateTo(context, Routes.index,clear: true);},
                     child:Container(
                       margin: EdgeInsets.only(top:duSetHeight(50)),
                       padding: EdgeInsets.only(top:duSetWidth(30),bottom:duSetWidth(30),left:duSetWidth(60),right:duSetWidth(60) ),
