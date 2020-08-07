@@ -33,7 +33,13 @@ dependencies:
   flutter_swiper: ^1.1.6
   # 骨架屏
   shimmer: ^1.1.1
+  # 短信
   mobsms: ^1.1.0
+  # 搜索框
+  floating_search_bar: ^0.3.0
+  # 带缓存的图片
+  cached_network_image: ^2.2.0+1
+  loading_animations: "^2.1.0"
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -49,6 +55,8 @@ flutter:
   assets:
       - assets/Teddy.flr
       - assets/button-animation.flr
+      - assets/images/no-data.png
+      - assets/images/loading.png
 
 
   

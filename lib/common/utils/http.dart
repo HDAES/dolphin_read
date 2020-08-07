@@ -13,7 +13,7 @@ class HttpUtil {
 
   HttpUtil._internal() {
     BaseOptions options = new BaseOptions(
-      baseUrl: SERVER_API_URL,
+      baseUrl: SERVER_LOCAL_API_URL,
       connectTimeout: 10000,
       receiveTimeout: 5000,
       headers: {},

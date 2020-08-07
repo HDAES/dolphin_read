@@ -20,7 +20,6 @@ class Global {
     // appState.getLocalThemeColor(true);
     // // 读取离线用户信息
     var _profileJSON = StorageUtil().getJSON(STORAGE_USER_PROFILE_KEY);
-    print(_profileJSON);
     if (_profileJSON != null) {
       profile = UserModel.fromJson(_profileJSON);
       isOfflineLogin = true;

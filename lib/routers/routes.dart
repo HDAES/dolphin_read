@@ -15,6 +15,8 @@ class Routes {
   static String selectGender = '/selectGender';
   static String selectTags = '/selectTags';
   static String index = '/index';
+  static String search = '/search';
+  static String bookInfo = '/bookInfo';
 
    static void configRoutes(Router router){
     router.notFoundHandler = new Handler(
@@ -27,6 +29,8 @@ class Routes {
     router.define(selectGender, handler: selectGenderHandler);   //选择性别
     router.define(selectTags, handler: selectTagsHandler);   //选择性别
     router.define(index, handler: indexHandler);   //选择性别
+    router.define(search, handler: searchHandler);   //选择性别
+    router.define(bookInfo, handler: bookInfoHandler);   //选择性别
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配
@@ -35,7 +39,7 @@ class Routes {
     if (params != null) {
       int index = 0;
       for (var key in params.keys) {
-        var value = Uri.encodeComponent(params[key]);
+        var value = Uri.encodeComponent(params[key].toString());
         if (index == 0) {
           query = "?";
         } else {
