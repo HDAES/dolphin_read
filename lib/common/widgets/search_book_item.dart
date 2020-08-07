@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-07 20:55:25
+ * @LastEditTime: 2020-08-07 22:31:46
+ */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
 import 'package:dolphin_read/routers/routes.dart';
@@ -12,7 +18,7 @@ class SearchBookItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: (){ 
         print(item.bookId);
-        Routes.navigateTo(context, Routes.bookInfo,params: {"bookId":item.bookId,"type":item.type});
+        Routes.navigateTo(context, Routes.bookInfo,params: item.toJson());
       },
       child: Container(
         width: duSetWidth(750),

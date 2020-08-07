@@ -17,7 +17,7 @@ class HttpUtil {
       connectTimeout: 10000,
       receiveTimeout: 5000,
       headers: {},
-      contentType: 'application/json; charset=utf-8',
+      contentType: 'application/json;charset=utf-8',
       responseType: ResponseType.json,
     );
     //加载配置
@@ -49,6 +49,7 @@ class HttpUtil {
   Map<String, dynamic> getAuthorizationHeader() {
     var headers;
     String token = Global.profile?.data?.authorization;
+    print(token);
     if (token != null) {
       headers = {
         'Authorization': 'Bearer $token',

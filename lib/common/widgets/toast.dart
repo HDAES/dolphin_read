@@ -1,8 +1,15 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-07 20:55:25
+ * @LastEditTime: 2020-08-07 22:19:45
+ */
 import 'dart:core';
 import 'dart:math';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loading_animations/loading_animations.dart';
 
 class Toast{
@@ -28,12 +35,27 @@ class Toast{
     Color color = slRandomColor();
     
     List<Widget> list =[
-      LoadingBouncingGrid.circle(backgroundColor: color),
-      LoadingBouncingGrid.square(backgroundColor: color),
-      LoadingJumpingLine.circle(backgroundColor: color),
-      LoadingJumpingLine.square(backgroundColor: color),
-      LoadingBumpingLine.circle(backgroundColor: color),
-      LoadingBumpingLine.square(backgroundColor:color)
+      SpinKitPumpingHeart(color:color),
+      SpinKitPulse(color:color),
+      SpinKitDoubleBounce(color:color),
+      SpinKitWave(color:color),
+      SpinKitThreeBounce(color:color),
+      SpinKitWanderingCubes(color:color),
+      SpinKitWanderingCubes(color:color),
+      SpinKitCircle(color:color),
+      SpinKitFadingFour(color:color),
+      SpinKitFadingCube(color:color),
+      SpinKitCubeGrid(color:color),
+      SpinKitFoldingCube(color:color),
+      SpinKitRing(color:color),
+      SpinKitDualRing(color:color),
+      SpinKitRipple(color:color),
+      SpinKitFadingGrid(color:color),
+      SpinKitSquareCircle(color:color),
+      SpinKitSpinningCircle(color:color),
+      SpinKitFadingCircle(color:color),
+      SpinKitHourGlass(color:color),
+      SpinKitPouringHourglass(color:color),
     ];
     BotToast.showCustomLoading(
         wrapAnimation: wrapAnimation,
