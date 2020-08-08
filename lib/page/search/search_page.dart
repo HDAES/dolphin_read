@@ -102,8 +102,10 @@ void iconTap() {
   _commentFocus.unfocus();
   if(searchStatus){
     _controller.clear();
+
     setState(() {
       searchStatus = false;
+      bookList=[];
     });
   }else{
     setState(() {
@@ -161,6 +163,7 @@ class _ChoicePlatformState extends State<ChoicePlatform> {
                 setState(() {
                   platform = item['type'];
                 });
+                Navigator.pop(context);
               },
               leading: Radio(
                 groupValue:platform,

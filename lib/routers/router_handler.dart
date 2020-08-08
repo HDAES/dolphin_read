@@ -4,6 +4,7 @@
  * @Date: 2020-08-03 20:36:33
  * @LastEditTime: 2020-08-03 22:15:17
  */
+import 'package:dolphin_read/page/book/book_page.dart';
 import 'package:dolphin_read/page/book_info/book_info_page.dart';
 import 'package:dolphin_read/page/index_page.dart';
 import 'package:dolphin_read/page/login/flare_sign_page.dart';
@@ -52,6 +53,13 @@ Handler searchHandler = Handler(
 Handler bookInfoHandler = Handler(
   handlerFunc: (BuildContext context, Map<String,List<String>> params){
     return BookInfoPage(params);
+  }
+);
+
+//书籍显示
+Handler bookHandler = Handler(
+  handlerFunc: (BuildContext context, Map<String,List<String>> params){
+    return BookPage(params);
   }
 );
 

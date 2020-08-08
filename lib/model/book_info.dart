@@ -28,7 +28,9 @@ class Data {
   String penName;
   String bookName;
   String bookDesc;
-  Null bookId;
+  bool isUpdate;
+  dynamic bookId;
+  dynamic chapterId;
 
   Data(
       {this.image,
@@ -36,7 +38,9 @@ class Data {
       this.penName,
       this.bookName,
       this.bookDesc,
-      this.bookId});
+      this.bookId,
+      this.isUpdate,
+      this.chapterId});
 
   Data.fromJson(Map<String, dynamic> json) {
     image = json['image'];
@@ -45,6 +49,8 @@ class Data {
     bookName = json['bookName'];
     bookDesc = json['bookDesc'];
     bookId = json['bookId'];
+    isUpdate = json['isUpdate'];
+    chapterId = json['chapterId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -55,6 +61,8 @@ class Data {
     data['bookName'] = this.bookName;
     data['bookDesc'] = this.bookDesc;
     data['bookId'] = this.bookId;
+    data['isUpdate'] = this.isUpdate;
+    data['chapterId'] = this.chapterId;
     return data;
   }
 }

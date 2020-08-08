@@ -17,6 +17,7 @@ class Routes {
   static String index = '/index';
   static String search = '/search';
   static String bookInfo = '/bookInfo';
+  static String book = '/book';
 
    static void configRoutes(Router router){
     router.notFoundHandler = new Handler(
@@ -31,6 +32,7 @@ class Routes {
     router.define(index, handler: indexHandler);   //选择性别
     router.define(search, handler: searchHandler);   //选择性别
     router.define(bookInfo, handler: bookInfoHandler);   //选择性别
+    router.define(book, handler: bookHandler); 
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配
@@ -49,7 +51,7 @@ class Routes {
         index++;
       }
     }
-    if(query!='') print('我是navigateTo传递的参数：$query');
+    if(query!='') //print('我是navigateTo传递的参数：$query');
     
 
     path = path + query;

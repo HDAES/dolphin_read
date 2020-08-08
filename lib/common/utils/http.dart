@@ -49,7 +49,6 @@ class HttpUtil {
   Map<String, dynamic> getAuthorizationHeader() {
     var headers;
     String token = Global.profile?.data?.authorization;
-    print(token);
     if (token != null) {
       headers = {
         'Authorization': 'Bearer $token',
@@ -95,6 +94,7 @@ class HttpUtil {
       Options options,
       bool noCache = true,
       bool refresh = false,
+      bool isFormData = false
     }
   ) async {
     Options requestOptions = options ?? Options();
@@ -109,12 +109,17 @@ class HttpUtil {
     // if(refresh){
     //   _dioCacheManager.delete(path);
     // }
+
+    
     var response = await dio.post(path,
-        data: params,
-        options: buildCacheOptions(Duration(days: 7),options:requestOptions,forceRefresh:refresh)
+        data: isFormData?FormData.fromMap(params):params,
+        options: buildCacheOptions(Duration(days: 7),subKey:params.toString(),options:requestOptions,forceRefresh:refresh)
       );
     return response.data;
   }
+
+
+  
 }
 
 //错误处理
