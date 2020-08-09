@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-09 14:19:46
+ * @LastEditTime: 2020-08-09 16:08:55
+ */
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
 import 'package:dolphin_read/model/book_catalog.dart';
@@ -57,7 +63,7 @@ class _BookCatalogPageState extends State<BookCatalogPage> {
                     itemBuilder: (BuildContext context,int index){
                       return ListTile(
                         onTap: (){
-                          print(snapshot.data[index]["id"]);
+                          //print('12313');
                           widget.refresh(snapshot.data[index]["id"]);
                           //widget.refresh();
                           Navigator.pop(context);
@@ -76,7 +82,6 @@ class _BookCatalogPageState extends State<BookCatalogPage> {
   }
 
   Future getBookCatalog(context,bool isRefresh) async{
-     print(page);
     BookCatalogModel catalogData  = await BookApi.getBookCatalog(context: context,params: {"bookId":widget.bookId,"page":page,"size":size },isRefresh:isRefresh);
     List bookCatalogList = catalogData.toJson()['data']['list'];
     

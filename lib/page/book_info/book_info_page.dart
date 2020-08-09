@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-07 20:55:25
- * @LastEditTime: 2020-08-07 23:15:34
+ * @LastEditTime: 2020-08-09 16:31:24
  */
 
 import 'package:dolphin_read/common/apis/apis.dart';
@@ -24,13 +24,16 @@ class BookInfoPage extends StatefulWidget {
 }
 
 class _BookInfoPageState extends State<BookInfoPage> {
+
+ 
+
   @override
   Widget build(BuildContext context) {
     return LightTheme(
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text(' '),
+          title: Text(''),
         ),
         body:FutureBuilder(
           future: getBookInfo(context),
@@ -155,11 +158,12 @@ class _BookInfoPageState extends State<BookInfoPage> {
             builder: (BuildContext context) {
               return ChoiceTags(bookTags,widget.params);
           }
-      );
+        );
       }
   }
   //请求书籍详情
   Future getBookInfo(context) async{
+    
     return  BookApi.getBookInfo(context: null,
       params: {
         "bookId":widget.params['bookId'][0],

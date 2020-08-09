@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-09 14:19:46
+ * @LastEditTime: 2020-08-09 22:03:00
+ */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/model/book_catalog.dart';
 import 'package:dolphin_read/model/book_content.dart';
@@ -10,8 +16,7 @@ class BookApi {
     var response = await HttpUtil().get(
       '/api/web/book/info',
       context: context,
-      params:params,
-      refresh:true
+      params:params
     );
     return BookInfoModel.fromJson(response);
   }
@@ -48,7 +53,7 @@ class BookApi {
 
   //获取书籍内容
   static Future<BookContentModel> getBookContent({@required BuildContext context,params}) async {
-    print(params);
+    print('章节===$params====');
     var response = await HttpUtil().get(
       '/api/book/chapter/content',
       context: context,

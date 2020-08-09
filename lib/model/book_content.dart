@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-09 14:19:46
+ * @LastEditTime: 2020-08-09 16:02:54
+ */
 class BookContentModel {
   int code;
   String message;
@@ -28,7 +34,7 @@ class Data {
   String nextTitle;
   int lastId;
   String title;
-  String content;
+  dynamic content;
 
   Data(
       {this.nextId,
