@@ -1,33 +1,26 @@
-/*
- * @Descripttion: 
- * @Author: Hades
- * @Date: 2020-08-07 20:55:25
- * @LastEditTime: 2020-08-07 22:31:46
- */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
+import 'package:dolphin_read/model/user_history.dart';
 import 'package:dolphin_read/routers/routes.dart';
 import 'package:flutter/material.dart';
 
-class SearchBookItemWidget extends StatelessWidget {
-  final item;
-  const SearchBookItemWidget(this.item);
-  
+class HistoryBookItemWidget extends StatelessWidget {
+  final HistoryData item;
+  HistoryBookItemWidget(this.item);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){ 
-        print(item.bookId);
-        Routes.navigateTo(context, Routes.bookInfo,params: item.toJson());
+      onTap: (){
+        Routes.navigateTo(context, Routes.book,params: {"bookId":item.bookId,"chapterId":item.chapterId});
       },
       child: Container(
-        width: duSetWidth(750),
+        width: duSetHeight(750),
         color: Colors.white,
         padding: EdgeInsets.only(left:10,right:10,bottom:10),
-        child: Row(
-          children: <Widget>[
+        child:Row(
+          children: [
             ImageLoadView(
-              item.bookImage,
+              item.image,
               height: duSetWidth(240),
               width: duSetWidth(180),
             ),
@@ -44,20 +37,31 @@ class SearchBookItemWidget extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text('作者：${item.panName}',style: TextStyle(color: Colors.black87)),
-                  Text('是否完结：${isEnd(item.isEnd)}',style: TextStyle(color: Colors.black87)),
-                  Text('最新章节：${item.newChapterTitle}',
-                    maxLines: 1,
+                  Text("阅读至：${item.title}"),
+                   Text('最新章节：${item.updateTitle}',
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Colors.black54),
                   ),
-                  Text('平台：${formatPlatform(item.type)}',style: TextStyle(color: Colors.black54)),
+                  Row(
+                    children: [
+                      Text('分类：'),
+                      Row(
+                        children: item.cateName.map((cate){
+                          return Padding(
+                            padding: EdgeInsets.only(right:10),
+                            child: Text('$cate'),
+                          );
+                        }).toList(),
+                      )
+                    ],
+                  )
                 ],
               ),
             )
           ],
         ),
-      )
+      ),
     );
   }
 }

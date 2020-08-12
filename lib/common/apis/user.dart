@@ -7,6 +7,7 @@
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/values/values.dart';
 import 'package:dolphin_read/model/user.dart';
+import 'package:dolphin_read/model/user_history.dart';
 import 'package:flutter/material.dart';
 
 import '../../global.dart';
@@ -21,5 +22,17 @@ class UserApi{
     StorageUtil().setJSON(STORAGE_USER_PROFILE_KEY,response);
     Global.init();
     return UserModel.fromJson(response);
+  }
+
+  //历史记录
+  static Future<UserHistoryModel> getHistory({@required BuildContext context,params}) async{
+    print(params);
+     var response = await HttpUtil().get(
+      '/api/user/book/history',
+      context: context,
+      params: params,
+      refresh: true
+    );
+    return UserHistoryModel.fromJson(response);
   }
 }

@@ -18,6 +18,8 @@ class Routes {
   static String search = '/search';
   static String bookInfo = '/bookInfo';
   static String book = '/book';
+  static String history  = '/history';
+  static String version ='/version';
 
    static void configRoutes(Router router){
     router.notFoundHandler = new Handler(
@@ -33,6 +35,8 @@ class Routes {
     router.define(search, handler: searchHandler);   //选择性别
     router.define(bookInfo, handler: bookInfoHandler);   //选择性别
     router.define(book, handler: bookHandler); 
+    router.define(history, handler: historyHandler); 
+    router.define(version, handler: versionHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配

@@ -7,7 +7,6 @@
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
-import 'package:dolphin_read/model/book_catalog.dart';
 import 'package:dolphin_read/model/book_content.dart';
 import 'package:dolphin_read/page/book/book_catalog.dart';
 import 'package:dolphin_read/page/book/book_control.dart';
@@ -15,6 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:flutter_html/style.dart';
+
+import '../../global.dart';
+
 
 class BookPage extends StatefulWidget {
   final Map params;
@@ -28,22 +30,26 @@ class _BookPageState extends State<BookPage> {
       GlobalKey<InnerDrawerState>();
   bool _onTapToClose = false;
 
-  ScrollController _scrollController=ScrollController();
+  ScrollController _scrollController;
 
   String bookId;
-
+  String chapterId;
   dynamic nextChapterId;
   dynamic lastChapterId;
-  var _futureBuilderFuture;
-  double fontSzie = 18;
-  bool light=true;
+  dynamic _futureBuilderFuture;
+  double fontSzie;
+  bool light;
   List catalogList = [];
  
   @override
   void initState() {
     super.initState();
+    chapterId = widget.params['chapterId'][0];
     bookId = widget.params['bookId'][0];
-    _futureBuilderFuture= getBookContent(context,widget.params['chapterId'][0]);
+    light = Global.light;
+    fontSzie = Global.fontSzie;
+    _futureBuilderFuture= getBookContent(context);
+    _scrollController=ScrollController();
   }
 
   @override
@@ -57,54 +63,98 @@ class _BookPageState extends State<BookPage> {
       key:_innerDrawerKey,
       onTapClose: _onTapToClose,
       swipe: true,
-      leftChild:BookCatalogPage(bookId,refresh), // required if rightChild is not set
+      leftChild:BookCatalogPage(bookId,switchChapter), // required if rightChild is not set
       scaffold: Scaffold(
-        backgroundColor: light?ColorsUtil.hexToColor('#F5FFFA'):Colors.black,
-       body:ListView(
-         controller: _scrollController,
-         children: <Widget>[
-          FutureBuilder(
-            future: _futureBuilderFuture,
-            builder: (BuildContext context, AsyncSnapshot snapshot){
-              if (snapshot.hasData) {
-                return GestureDetector(
-                  onTap: (){openControl();},
-                  child:Html(
-                    data: snapshot.data.data.content,
-                    style: {
-                      "div":Style(
-                        fontSize: FontSize(fontSzie),
-                        backgroundColor: light?ColorsUtil.hexToColor('#F5FFFA'):Colors.black,
-                        color: light?ColorsUtil.hexToColor('#333333'):ColorsUtil.hexToColor('#777777'),
-                      ),
-                    }, 
+        backgroundColor: ColorsUtil.getBodyColor(),
+        body:FutureBuilder(
+          future: _futureBuilderFuture,
+          builder: (BuildContext context, AsyncSnapshot snapshot){
+            if (snapshot.hasData) {
+              return ListView(
+                controller: _scrollController,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: (){openControl();},
+                    child:Html(
+                      data: snapshot.data.data.content,
+                      style: {
+                        "div":Style(
+                          fontSize: FontSize(fontSzie),
+                          backgroundColor: ColorsUtil.getBodyColor(),
+                          color: ColorsUtil.getTextColor(),
+                        ),
+                      }, 
+                    )
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom:duSetWidth(80)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        GestureDetector(
+                           onTap: () =>lastChapter(),
+                          child: Container(
+                            width: duSetWidth(200),
+                            height: duSetHeight(60),
+                            alignment: Alignment.center,
+                            child: Text('上一章',style: TextStyle(color: ColorsUtil.getTextColor())),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color:ColorsUtil.getTextColor())
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: ()=>openCatalog(),
+                          icon: Icon(Icons.menu),
+                          color:ColorsUtil.getTextColor(),
+                          iconSize: duSetFontSize(68)
+                        ),
+                        GestureDetector(
+                          onTap: () =>nextChapter(),
+                          child: Container(
+                            width: duSetWidth(200),
+                            height: duSetHeight(60),
+                            alignment: Alignment.center,
+                            child: Text('下一章',style: TextStyle(color:ColorsUtil.getTextColor())),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color:ColorsUtil.getTextColor())
+                            ),
+                          )
+                        )
+                      ],
+                    ),
                   )
-                );
-              }else{
-                return Center(
-                  child: Text('loading'),
-                );
-              }
+                ],
+              );
+            }else{
+              return Center(
+                child: LoadingWidget(),
+              );
             }
-          )
-         ],
-       )
+          }
+        )
       ) 
     );
   }
 
-  Future getBookContent(context,chapterId) async{
+  Future getBookContent(context) async{
     BookContentModel bookContent = await BookApi.getBookContent(context: context,params: {"chapterId":chapterId});
     nextChapterId = bookContent.data.nextId;
     lastChapterId = bookContent.data.lastId;
-    _scrollController.jumpTo(0);
+    
     return bookContent;
   }
 
 
   //切换章节
-  void refresh(newChapterId){
-    _futureBuilderFuture= getBookContent(context,newChapterId.toString());
+  void switchChapter(newChapterId){
+    setState(() {
+      chapterId = newChapterId.toString();
+    });
+    _scrollController.jumpTo(0);
+   _futureBuilderFuture = getBookContent(context);
   }
 
   //打开底部控制区
@@ -115,7 +165,7 @@ class _BookPageState extends State<BookPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10)),
         builder: (BuildContext context) {
-          return BookControlWidget(fontSzie,changeFontSize,openCatalog,changeTheme,nextChapter,lastChapter);
+          return BookControlWidget(fontSzie,light,changeFontSize,openCatalog,changeTheme,nextChapter,lastChapter);
       }
     );
   }
@@ -124,33 +174,45 @@ class _BookPageState extends State<BookPage> {
   void openCatalog(){
      _innerDrawerKey.currentState.toggle();
   }
-  //改变模式
-  void changeTheme(){
-    setState(() {
-      light=!light;
-    });
-  }
   //下一章
   void nextChapter(){
-    print(nextChapterId);
     if(nextChapterId==null){
       Toast.show('暂无下一章');
     }else{
-     _futureBuilderFuture= getBookContent(context,nextChapterId.toString());
+      _scrollController.jumpTo(0);
+      setState(() {
+        chapterId = nextChapterId.toString();
+      });
+     _futureBuilderFuture= getBookContent(context);
     } 
   }
-
   //上一章
   void lastChapter(){
     if(lastChapterId==null){
       Toast.show('暂无上一章');
     }else{
-     _futureBuilderFuture= getBookContent(context,lastChapterId.toString());
+      _scrollController.jumpTo(0);
+      setState(() {
+        chapterId = lastChapterId.toString();
+      });
+     _futureBuilderFuture= getBookContent(context);
     } 
   }
   void changeFontSize(double size){
     setState(() {
       fontSzie=size;
+    });
+     StorageUtil().setJSON('fontSize', size);
+     Global.fontSzie = size;
+  }
+
+  //改变主题
+   //改变模式
+  void changeTheme(){
+    StorageUtil().setBool('theme', !light);
+    Global.light = !light;
+    setState(() {
+      light=!light;
     });
   }
 }

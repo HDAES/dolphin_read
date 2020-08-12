@@ -7,14 +7,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:dolphin_read/common/utils/utils.dart';
+
 class BookControlWidget extends StatefulWidget {
   final double fontSzie;
+  final bool light;
   final Function changeFontSize;
   final Function openCatalog;
   final Function changeTheme;
   final Function nextChapter;
   final Function lastChapter;
-  BookControlWidget(this.fontSzie,this.changeFontSize,this.openCatalog,this.changeTheme,this.nextChapter,this.lastChapter);
+  BookControlWidget(this.fontSzie,this.light,this.changeFontSize,this.openCatalog,this.changeTheme,this.nextChapter,this.lastChapter);
   @override
   _BookControlWidgetState createState() => _BookControlWidgetState();
 }
@@ -22,9 +24,11 @@ class BookControlWidget extends StatefulWidget {
 class _BookControlWidgetState extends State<BookControlWidget> {
   
   double _fontSize;
+  bool _light;
   @override
   void initState() {
-    _fontSize = widget.fontSzie;
+    _fontSize = widget.fontSzie??18;
+    _light = widget.light;
     super.initState();
   }
   @override
@@ -121,8 +125,8 @@ class _BookControlWidgetState extends State<BookControlWidget> {
                 iconSize: duSetFontSize(68)
               ),
               IconButton(
-                onPressed: (){ widget.changeTheme();},
-                icon: Icon(Icons.brightness_2),
+                onPressed: (){ widget.changeTheme();setState((){_light = !_light;});},
+                icon: Icon(_light?Icons.brightness_2:Icons.brightness_1),
                 color: Colors.white70,
                 iconSize: duSetFontSize(68)
               ),

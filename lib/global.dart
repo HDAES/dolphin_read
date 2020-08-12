@@ -3,11 +3,17 @@ import 'package:dolphin_read/common/values/values.dart';
 import 'package:dolphin_read/model/user.dart';
 import 'package:flutter/material.dart';
 
+import 'common/utils/storage.dart';
+
 class Global {
   /// 用户配置
   static UserModel profile = UserModel();
 
   static bool isOfflineLogin = false;
+
+  ///模式   夜间 / 白天
+  static bool light = true;
+  static double fontSzie = 18;
   /// init
   static Future init() async {
     
@@ -24,5 +30,16 @@ class Global {
       profile = UserModel.fromJson(_profileJSON);
       isOfflineLogin = true;
     }
+
+
+    ///读取用户配置
+    var _light = StorageUtil().getBool('theme');
+    if(_profileJSON != null) {
+      light = _light;
+    } 
+    var _fontSzie = StorageUtil().getJSON('fontSize');
+    if(_profileJSON != null) {
+      fontSzie = _fontSzie;
+    } 
   }
 }

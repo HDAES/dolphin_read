@@ -11,9 +11,11 @@ class HttpUtil {
 
   static Dio dio;
 
+ 
+
   HttpUtil._internal() {
     BaseOptions options = new BaseOptions(
-      baseUrl: SERVER_LOCAL_API_URL,
+      baseUrl: SERVER_API_URL,
       connectTimeout: 10000,
       receiveTimeout: 5000,
       headers: {},
@@ -27,6 +29,9 @@ class HttpUtil {
     dio.interceptors.add(InterceptorsWrapper(onRequest: (RequestOptions options) {
       return options; //continue
     }, onResponse: (Response response) {
+      if(response.data['code']!=200){
+        Toast.show(response.data['message']);
+      }
       return response; // continue
     }, onError: (DioError e) {
       ErrorEntity eInfo = createErrorEntity(e);
@@ -44,6 +49,11 @@ class HttpUtil {
         return eInfo;
     }));
   }
+
+  setbaseUrl(url){
+   dio.options.baseUrl = url;
+  }
+ 
 
   /// 添加头部信息
   Map<String, dynamic> getAuthorizationHeader() {

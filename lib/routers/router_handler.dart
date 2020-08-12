@@ -8,6 +8,8 @@ import 'package:dolphin_read/page/book/book_page.dart';
 import 'package:dolphin_read/page/book_info/book_info_page.dart';
 import 'package:dolphin_read/page/index_page.dart';
 import 'package:dolphin_read/page/login/flare_sign_page.dart';
+import 'package:dolphin_read/page/me/history/history_page.dart';
+import 'package:dolphin_read/page/me/version/version_page.dart';
 import 'package:dolphin_read/page/search/search_page.dart';
 import 'package:dolphin_read/page/user_config/user_select_gender_page.dart';
 import 'package:dolphin_read/page/user_config/user_select_tag_page.dart';
@@ -60,6 +62,21 @@ Handler bookInfoHandler = Handler(
 Handler bookHandler = Handler(
   handlerFunc: (BuildContext context, Map<String,List<String>> params){
     return BookPage(params);
+  }
+);
+
+
+//历史记录
+Handler historyHandler = Handler(
+  handlerFunc: (BuildContext context, Map<String,List<String>> params){
+    return HistoryPage();
+  }
+);
+
+//版本切换
+Handler versionHandler = Handler(
+  handlerFunc: (BuildContext context, Map<String,List<String>> params){
+    return VersionPage();
   }
 );
 

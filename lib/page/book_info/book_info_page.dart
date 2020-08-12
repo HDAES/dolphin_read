@@ -12,7 +12,6 @@ import 'package:dolphin_read/model/book_tags.dart';
 import 'package:dolphin_read/page/user_config/user_select_tag_page.dart';
 import 'package:dolphin_read/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../common/utils/screen.dart';
 
@@ -99,7 +98,7 @@ class _BookInfoPageState extends State<BookInfoPage> {
                           child: Container(
                             width: duSetWidth(375),
                             child: Center(
-                              child:snapshot.data.data.isUpdate?Text('更新最新章节'):Text('已为最新章节'),
+                              child:snapshot.data.data.update?Text('更新章节'):Text('无法更新'),
                             ),
                             decoration: BoxDecoration(
                               color: Colors.blueGrey
@@ -114,10 +113,10 @@ class _BookInfoPageState extends State<BookInfoPage> {
                             width: duSetWidth(375),
                             height: duSetWidth(100),
                             child: Center(
-                              child: snapshot.data.data.isHave?Text('阅读'):Text('暂无数据'),
+                              child: snapshot.data.data.have?Text('阅读'):Text('书籍入库'),
                             ),
                             decoration: BoxDecoration(
-                              color:  snapshot.data.data.isHave?Color(0xFF33C3A5):Colors.grey
+                              color:  snapshot.data.data.have?Color(0xFF33C3A5):Colors.grey
                             ),
                           ),
                         )
@@ -127,7 +126,7 @@ class _BookInfoPageState extends State<BookInfoPage> {
                 ],
               );
             }else{
-              return Text('loading');
+              return LoadingWidget();
             }
           }
         )
@@ -139,15 +138,15 @@ class _BookInfoPageState extends State<BookInfoPage> {
   }
   
   void rightTap(context,item) async{
-    if(item.isUpdate){
+   
+    if(item.update){
       BookApi.getUpdateBook(context: context,params: {"bookId":item.bookId});
     }
     
   }
 
   void leftTap(context,item) async{
-      if(item.isHave){
-
+      if(item.have){
         Routes.navigateTo(context, Routes.book,params: {"bookId":item.bookId,"chapterId":item.chapterId});
       }else{
         BookTagsModel bookTags = await BookApi.getBookTags(context: context);
@@ -195,27 +194,27 @@ class _ChoiceTagsState extends State<ChoiceTags> {
               child:Text('标签选择',style: TextStyle(fontSize: duSetFontSize(48))),
             ),
             Wrap(
-                spacing: 5, 
-                children:widget.bookTags.data.map((item){
-                  return ChoiceChip(
-                      label: Text(item.name,style: TextStyle(color: Colors.white)), 
-                       selected: _selectTags.contains(item.id),
-                      backgroundColor: Colors.grey[400],
-                      selectedColor:  strToColor(item.name),
-                      onSelected: (bool isCheck){ setState(() {
-                        if(_selectTags.length<3){
-                          isCheck?_selectTags.add(item.id):_selectTags.remove(item.id);
-                          isCheck?Toast.show("已选择:${item.name}"):Toast.show("已取消:${item.name}");
-                        }else{
-                          Toast.show("最多选择3个标签");
-                        }
-                        if(!isCheck){
-                          _selectTags.remove(item.id);
-                          Toast.show("已取消:${item.name}");
-                        }
-                      });},
-                    );
-                }).toList()
+              spacing: 5, 
+              children:widget.bookTags.data.map((item){
+                return ChoiceChip(
+                  label: Text(item.name,style: TextStyle(color: Colors.white)), 
+                  selected: _selectTags.contains(item.id),
+                  backgroundColor: Colors.grey[400],
+                  selectedColor:  strToColor(item.name),
+                  onSelected: (bool isCheck){ setState(() {
+                    if(_selectTags.length<3){
+                      isCheck?_selectTags.add(item.id):_selectTags.remove(item.id);
+                      isCheck?Toast.show("已选择:${item.name}"):Toast.show("已取消:${item.name}");
+                    }else{
+                      Toast.show("最多选择3个标签");
+                    }
+                    if(!isCheck){
+                      _selectTags.remove(item.id);
+                      Toast.show("已取消:${item.name}");
+                    }
+                  });},
+                );
+              }).toList()
               )
           ],
         ),
@@ -226,8 +225,9 @@ class _ChoiceTagsState extends State<ChoiceTags> {
               "bookId":widget.params['bookId'][0],
               "type":widget.params['type'][0],
               "isEnd":widget.params['isEnd'][0],
-              "cateId":_selectTags.toString().replaceAll("[", "").replaceAll("]", "")
+              "cateId":_selectTags.toString().replaceAll("[","").replaceAll("]", "")
             });
+            //DialogWidget.showSuccess(context,code:200, title:'开始爬取中',desc: "请等待...");
             Navigator.pop(context);
           },
           child: Container(

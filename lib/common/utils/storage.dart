@@ -45,6 +45,27 @@ class StorageUtil {
     return val == null ? false : val;
   }
 
+
+  Future<bool> setStringList(String key,List<Map> list){
+    List<String> _stringList = [];
+    list.forEach((element) { 
+      _stringList.add(jsonEncode(element).toString());
+    });
+    return _prefs.setStringList(key, _stringList);
+  }
+
+  List<Map> getStringList(String key){
+    List<Map> _mapList = [];
+    List<String> _stringList = _prefs.getStringList(key);
+    if(_stringList!=null&&_stringList.length>0){
+      _stringList.forEach((element) {
+         Map item =  json.decode(element);
+        _mapList.add(item);
+      });
+    }
+    return _mapList;
+  }
+
   Future<bool> remove(String key) {
     return _prefs.remove(key);
   }

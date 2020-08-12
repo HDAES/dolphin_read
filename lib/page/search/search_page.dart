@@ -1,5 +1,6 @@
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/utils/screen.dart';
+import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/values/values.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
 import 'package:dolphin_read/model/search.dart';
@@ -15,7 +16,7 @@ class _SearchPageState extends State<SearchPage> {
   TextEditingController _controller = new TextEditingController();
   FocusNode _commentFocus = FocusNode();
   String bookName;
-  String _platform='1';
+  String _platform='0';
   int page =1;//页数
   bool searchStatus=false;//搜索状态
   bool isAll=false;//是否所有小说
@@ -26,10 +27,12 @@ class _SearchPageState extends State<SearchPage> {
   },{
     "type":"2","name":'笔趣阁'
   }];
-
   List bookList=[];
+
+  List<Map> searchHistory = [];
   @override
   void initState() { 
+    searchHistory = getHistoryList();
     super.initState();
   }
   
@@ -42,18 +45,60 @@ class _SearchPageState extends State<SearchPage> {
       commentFocus: _commentFocus,
       searchStatus:searchStatus,
       controller: _controller,
-      body: bookList.length ==0? Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(P.no_data,width: 300),
-            Text('暂未搜索结果',style:TextStyle(fontSize:duSetFontSize(36))),
-            GestureDetector(
-              onTap: (){ _choicePlatform(context);},
-              child: Text('使用云搜索',style:TextStyle(fontSize:duSetFontSize(32),color: Colors.blue)),
-            )
-          ],
-        ),
+      body: bookList.length ==0?Column(
+        mainAxisAlignment:searchStatus?MainAxisAlignment.center:MainAxisAlignment.start,
+        children:searchStatus? <Widget>[
+          Image.asset(P.no_data,width: 300),
+          Text('暂未搜索结果',style:TextStyle(fontSize:duSetFontSize(36))),
+          GestureDetector(
+            onTap: (){ _choicePlatform(context);},
+            child: Text('使用云搜索',style:TextStyle(fontSize:duSetFontSize(32),color: Colors.blue)),
+          )
+        ]:[
+          Container(
+            padding: EdgeInsets.only(top:10),
+            width: duSetWidth(700),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('历史记录',style: TextStyle(fontSize: duSetFontSize(36))),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          searchHistory = [];
+                        });
+                        removeHistory();
+                      },
+                      child: Icon(Icons.delete_outline),
+                    )
+                    
+                  ],
+                ),
+                searchHistory!=null && searchHistory.length>0?
+                Wrap(
+                  spacing: 5, 
+                  children: searchHistory.map((item){
+                    return ChoiceChip(
+                      label:Text("${item['searchKey']}"),
+                      selected:false,
+                      backgroundColor: Colors.grey[400],
+                      onSelected: (bool isCheck){
+                        setState(() {
+                          bookName = item['searchKey'];
+                          _platform = item['platform'];
+                        });
+                        searchBook();
+                      }
+                    );
+                  }).toList()
+                ):Padding(padding: EdgeInsets.only(top:10),child: Text('暂无历史记录'),)
+              ],
+            ),
+          )
+        ],
       ): EasyRefresh(
           header: MaterialHeader(),
           footer: BallPulseFooter(),
@@ -80,18 +125,26 @@ class _SearchPageState extends State<SearchPage> {
 void  searchBook() async{
   if(!isAll){
     SearchMode respones = await  SearchApi.getSearch(context:context,params: {"bookName":bookName,"type":_platform,"page":page});
-    bookList.addAll(respones.data);
-    setState(() {
-        bookList = page==1?respones.data:bookList;
-    }); 
-    if(respones.data.length>0){
+    setSearchHistory({"searchKey":bookName,"platform":_platform});
+    if(respones.code==200){
+      bookList.addAll(respones.data);
       setState(() {
-        searchStatus = true;
-      });
-    }
-    if(respones.data.length==0&&page>2){
+         searchStatus = true;
+          bookList = page==1?respones.data:bookList;
+      }); 
+      if(respones.data.length==0){
+        Toast.show("暂未搜索到,请切换平台");
+      }
+      if(respones.data.length==0&&page>2){
+        setState(() {
+          isAll=true;
+        });
+      }
+      //添加缓存
+      
+    }else{
       setState(() {
-        isAll=true;
+        searchStatus = false;
       });
     }
   }
@@ -160,6 +213,7 @@ class _ChoicePlatformState extends State<ChoicePlatform> {
             return ListTile(
               onTap: (){
                 widget.change(item['type']);
+                Toast.show('已选择：${item['name']}');
                 setState(() {
                   platform = item['type'];
                 });
@@ -170,8 +224,8 @@ class _ChoicePlatformState extends State<ChoicePlatform> {
                 activeColor: Colors.blue,
                 value: "${item['type'].toString()}",
                 onChanged: (String val) {
-                  print(item['type']);
                     widget.change(val);
+                    Toast.show('已选择：${item['name']}');
                     setState(() {
                       platform = val;
                     });
@@ -187,6 +241,7 @@ class _ChoicePlatformState extends State<ChoicePlatform> {
     );
   }
 }
+
 
 
 

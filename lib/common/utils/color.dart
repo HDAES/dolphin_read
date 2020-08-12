@@ -6,6 +6,10 @@
  */
 import 'dart:ui' show Color;
 
+import 'package:dolphin_read/common/values/values.dart';
+import 'package:dolphin_read/global.dart';
+
+
 class ColorsUtil {
   /// 十六进制颜色，
   /// hex, 十六进制值，例如：0xffffff,
@@ -19,5 +23,14 @@ class ColorsUtil {
     }
 
     return new Color(int.parse(s.substring(1, 7), radix: 16) + 0xFF000000);
+  }
+
+  //返回字体颜色
+  static Color getTextColor(){
+    return Global.light?ColorsValue.textLightColor:ColorsValue.textDarkColor;
+  }
+
+  static Color getBodyColor(){
+    return Global.light?ColorsValue.bodyLightColor:ColorsValue.bodyDarkColor;
   }
 }

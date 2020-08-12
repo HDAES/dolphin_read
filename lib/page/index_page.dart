@@ -5,6 +5,7 @@
  * @LastEditTime: 2020-08-03 22:30:31
  */
 import 'package:dolphin_read/page/home/home_page.dart';
+import 'package:dolphin_read/page/me/me_page.dart';
 import 'package:dolphin_read/routers/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:dolphin_read/common/utils/utils.dart';
@@ -31,14 +32,14 @@ class _IndexPageState extends State<IndexPage> {
         index: currentIndex,
         children: <Widget>[
           HomePage(),
-          Text('2'),
+          MePage() 
         ],
       ),
       bottomNavigationBar: ConvexAppBar(
         items: [
           TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Icons.add, title: 'Add'),
-          TabItem(icon: Icons.message, title: 'Message'),
+          TabItem(icon: Icons.supervisor_account, title: 'me'),
         ],
         style: TabStyle.fixedCircle,
         initialActiveIndex: 1,//optional, default as 0

@@ -2,14 +2,14 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 20:36:33
- * @LastEditTime: 2020-08-03 22:16:18
+ * @LastEditTime: 2020-08-11 21:52:52
  */
 
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/widgets/toast.dart';
 import 'package:dolphin_read/routers/routes.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/cupertino.dart';
 class UserSelectTagsPage extends StatefulWidget {
   @override
   _UserSelectTagsPageState createState() => _UserSelectTagsPageState();
@@ -111,7 +111,8 @@ class _UserSelectTagsPageState extends State<UserSelectTagsPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(
-                            IconData(0xe636,fontFamily: 'CustomIcon'), 
+                            Icons.gradient,
+                            // IconData(0xe636,fontFamily: 'CustomIcon'), 
                             color: ColorsUtil.hexToColor('#448AFF'),
                             size: duSetFontSize(40),
                           ),
@@ -147,7 +148,8 @@ class _UserSelectTagsPageState extends State<UserSelectTagsPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(
-                            IconData(0xe636,fontFamily: 'CustomIcon'), 
+                            Icons.gradient,
+                            // IconData(0xe636,fontFamily: 'CustomIcon'), 
                             color: ColorsUtil.hexToColor('#FF5252'),
                             size: duSetFontSize(40),
                           ),

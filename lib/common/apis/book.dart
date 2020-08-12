@@ -16,7 +16,8 @@ class BookApi {
     var response = await HttpUtil().get(
       '/api/web/book/info',
       context: context,
-      params:params
+      params:params,
+      refresh: true
     );
     return BookInfoModel.fromJson(response);
   }
@@ -36,7 +37,9 @@ class BookApi {
       '/api/update/book',
       context: context,
       params:params,
+      refresh:true
     );
+    print(response['message']);
     return response;
   }
 

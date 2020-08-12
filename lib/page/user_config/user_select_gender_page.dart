@@ -2,12 +2,13 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 20:36:33
- * @LastEditTime: 2020-08-03 21:05:10
+ * @LastEditTime: 2020-08-11 21:52:31
  */
 
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/routers/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class UserSelectGenderPage extends StatelessWidget {
   @override
@@ -48,7 +49,8 @@ class UserSelectGenderPage extends StatelessWidget {
                       GestureDetector(
                         onTap: (){},
                         child: Icon(
-                          IconData(0xe608,fontFamily: 'CustomIcon'),
+                          // IconData(0xe608,fontFamily: 'CustomIcon'),
+                          Icons.gradient,
                           color: ColorsUtil.hexToColor('#448AFF'),
                           size: duSetFontSize(180),
                         ),
@@ -58,7 +60,8 @@ class UserSelectGenderPage extends StatelessWidget {
                         child: GestureDetector(
                           onTap: (){},
                           child: Icon(
-                            IconData(0xe611,fontFamily: 'CustomIcon'),
+                            Icons.gradient,
+                            // IconData(0xe611,fontFamily: 'CustomIcon'),
                             color: ColorsUtil.hexToColor('#FF5252'),
                             size: duSetFontSize(180),
                           ),

@@ -12,8 +12,8 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 class BookCatalogPage extends StatefulWidget {
   final String bookId;
-  final Function refresh;
-  BookCatalogPage(this.bookId,this.refresh);
+  final Function switchChapter;
+  BookCatalogPage(this.bookId,this.switchChapter);
   @override
   _BookCatalogPageState createState() => _BookCatalogPageState();
 }
@@ -46,6 +46,7 @@ class _BookCatalogPageState extends State<BookCatalogPage> {
               if (snapshot.hasData) {
                 return EasyRefresh(
                   header: MaterialHeader(),
+                  footer: BallPulseFooter(),
                   onRefresh: () async {
                     if (mounted) {
                       setState(() {
@@ -63,9 +64,7 @@ class _BookCatalogPageState extends State<BookCatalogPage> {
                     itemBuilder: (BuildContext context,int index){
                       return ListTile(
                         onTap: (){
-                          //print('12313');
-                          widget.refresh(snapshot.data[index]["id"]);
-                          //widget.refresh();
+                          widget.switchChapter(snapshot.data[index]["id"]);
                           Navigator.pop(context);
                         },
                         title: Text('${snapshot.data[index]['title']}'),
@@ -74,7 +73,7 @@ class _BookCatalogPageState extends State<BookCatalogPage> {
                   )
                 );
               }else{
-                return Text('loading');
+                return LoadingWidget();
               }
             },
           ),

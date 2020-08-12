@@ -24,44 +24,44 @@ class BookInfoModel {
 
 class Data {
   String image;
-  bool isHave;
+  bool have;
   String penName;
   String bookName;
   String bookDesc;
-  bool isUpdate;
-  dynamic bookId;
-  dynamic chapterId;
+  bool update;
+  String bookId;
+  String chapterId;
 
   Data(
       {this.image,
-      this.isHave,
+      this.have,
       this.penName,
       this.bookName,
       this.bookDesc,
       this.bookId,
-      this.isUpdate,
+      this.update,
       this.chapterId});
 
   Data.fromJson(Map<String, dynamic> json) {
     image = json['image'];
-    isHave = json['isHave'];
+    have = json['have'];
     penName = json['penName'];
     bookName = json['bookName'];
     bookDesc = json['bookDesc'];
     bookId = json['bookId'];
-    isUpdate = json['isUpdate'];
+    update = json['update'];
     chapterId = json['chapterId'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['image'] = this.image;
-    data['isHave'] = this.isHave;
+    data['have'] = this.have;
     data['penName'] = this.penName;
     data['bookName'] = this.bookName;
     data['bookDesc'] = this.bookDesc;
     data['bookId'] = this.bookId;
-    data['isUpdate'] = this.isUpdate;
+    data['update'] = this.update;
     data['chapterId'] = this.chapterId;
     return data;
   }

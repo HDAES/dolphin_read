@@ -12,3 +12,4 @@ export 'http.dart';
 export 'color.dart';
 export 'verification.dart';
 export 'format.dart';
+export 'history.dart';
