@@ -49,9 +49,17 @@ dependencies:
   awesome_dialog: "^1.1.3"
   # 左右滑动
   flutter_slidable: "^0.5.5"
+  # 状态管理
+  provider: ^4.3.2
+  
 dev_dependencies:
+
+  
+
   flutter_test:
     sdk: flutter
+
+    
 
 flutter:
 
@@ -73,3 +81,5 @@ flutter:
     - family: CustomIcon
       fonts:
         - asset: assets/fonts/iconfont.ttf
+
+

@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-12 22:12:53
+ * @LastEditTime: 2020-08-13 22:33:27
+ */
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -45,7 +51,14 @@ class StorageUtil {
     return val == null ? false : val;
   }
 
+  Future<bool> setInt(String key,int intval){
+    return _prefs.setInt(key, intval);
+  }
 
+  int getInt(String key){
+    return _prefs.getInt(key);
+  }
+  
   Future<bool> setStringList(String key,List<Map> list){
     List<String> _stringList = [];
     list.forEach((element) { 
