@@ -1,30 +1,41 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-14 10:29:08
+ * @LastEditTime: 2020-08-14 16:14:55
+ */
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
 import 'package:dolphin_read/model/user_history.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
-class HistoryPage extends StatefulWidget {
+class BookShelfPage extends StatefulWidget {
   @override
-  _HistoryPageState createState() => _HistoryPageState();
+  _BookShelfPageState createState() => _BookShelfPageState();
 }
 
-class _HistoryPageState extends State<HistoryPage> {
-  EasyRefreshController _controller = EasyRefreshController();
+class _BookShelfPageState extends State<BookShelfPage>  with AutomaticKeepAliveClientMixin{
+ EasyRefreshController _controller = EasyRefreshController();
   dynamic _futureBuilderFuture;
   
   int page = 1;
   int size = 10;
   List historyList = [];
   bool _enableLoad = true;
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   void initState() {
-     _futureBuilderFuture= getUserHistory(context);
+     _futureBuilderFuture= getUserHistory(context,false);
     super.initState();
   }
   
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('历史记录'),
@@ -41,14 +52,14 @@ class _HistoryPageState extends State<HistoryPage> {
                 setState(() {
                   page = 1;
                 });
-                getUserHistory(context);
+                getUserHistory(context,true);
               },
               onLoad:_enableLoad?() async {
                 print('Load');
                 setState(() {
                   page = page + 1;
                 });
-                getUserHistory(context);
+                getUserHistory(context,true);
               }:null,
               child: ListView.builder(
                 padding: EdgeInsets.only(top: 10),
@@ -66,8 +77,8 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 
-   Future getUserHistory(context) async{
-    UserHistoryModel  userHistory = await UserApi.getHistory(context: context,params: {"page":page,"size":size});
+   Future getUserHistory(context,refresh) async{
+    UserHistoryModel  userHistory = await UserApi.getHistory(context: context,params: {"page":page,"size":size},refresh: refresh);
     
     historyList.addAll(userHistory.data.list);
     setState(() {

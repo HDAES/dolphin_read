@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-07 20:55:25
- * @LastEditTime: 2020-08-09 16:31:24
+ * @LastEditTime: 2020-08-14 16:56:19
  */
 
 import 'package:dolphin_read/common/apis/apis.dart';
@@ -24,13 +24,17 @@ class BookInfoPage extends StatefulWidget {
 
 class _BookInfoPageState extends State<BookInfoPage> {
 
- 
-
+  
+  bool isHave;
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  } 
   @override
   Widget build(BuildContext context) {
-    return LightTheme(
-      child: Scaffold(
-        backgroundColor: Colors.white,
+    print(widget.params);
+    return Scaffold(
         appBar: AppBar(
           title: Text(''),
         ),
@@ -38,6 +42,7 @@ class _BookInfoPageState extends State<BookInfoPage> {
           future: getBookInfo(context),
           builder: (BuildContext context, AsyncSnapshot snapshot){
             if (snapshot.hasData) {
+              isHave = snapshot.data.data.have;
               return Stack(
                 children: <Widget>[
                   ListView(
@@ -60,7 +65,7 @@ class _BookInfoPageState extends State<BookInfoPage> {
                               children: <Widget>[
                                 Text(
                                   snapshot.data.data.bookName,
-                                  style: TextStyle(fontSize: duSetFontSize(48),color: Colors.black87),
+                                  style: TextStyle(fontSize: duSetFontSize(48)),
                                 ),
                                 Text(
                                   '作者：${snapshot.data.data.penName}',
@@ -73,7 +78,7 @@ class _BookInfoPageState extends State<BookInfoPage> {
                                 Text('最新章节：${widget.params['newChapterTitle'][0]}',
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(color: Colors.black54),
+                                  
                                 )
                               ],
                             ),
@@ -83,7 +88,7 @@ class _BookInfoPageState extends State<BookInfoPage> {
                       Padding(
                         padding: EdgeInsets.only(top:10),
                         child: Text('简介：${snapshot.data.data.bookDesc}',
-                          style: TextStyle(fontSize: duSetWidth(32),color: Colors.black45),
+                          style: TextStyle(fontSize: duSetWidth(32)),
                         ),
                       )
                     ],
@@ -113,10 +118,10 @@ class _BookInfoPageState extends State<BookInfoPage> {
                             width: duSetWidth(375),
                             height: duSetWidth(100),
                             child: Center(
-                              child: snapshot.data.data.have?Text('阅读'):Text('书籍入库'),
+                              child: isHave?Text('阅读'):Text('书籍入库'),
                             ),
                             decoration: BoxDecoration(
-                              color:  snapshot.data.data.have?Color(0xFF33C3A5):Colors.grey
+                              color:  isHave?Color(0xFF33C3A5):Colors.grey
                             ),
                           ),
                         )
@@ -130,8 +135,7 @@ class _BookInfoPageState extends State<BookInfoPage> {
             }
           }
         )
-      ),
-    );
+      );
     
 
     
@@ -155,15 +159,18 @@ class _BookInfoPageState extends State<BookInfoPage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10)),
             builder: (BuildContext context) {
-              return ChoiceTags(bookTags,widget.params);
+              return ChoiceTags(bookTags,widget.params,(){
+                setState(() {
+                  isHave = true;
+                });
+              });
           }
         );
       }
   }
   //请求书籍详情
   Future getBookInfo(context) async{
-    
-    return  BookApi.getBookInfo(context: null,
+    return  BookApi.getBookInfo(context: context,
       params: {
         "bookId":widget.params['bookId'][0],
         "type":widget.params['type'][0]
@@ -175,7 +182,8 @@ class _BookInfoPageState extends State<BookInfoPage> {
 class ChoiceTags extends StatefulWidget {
   final BookTagsModel bookTags;
   final Map params;
-  ChoiceTags(this.bookTags,this.params);
+  final Function aa;
+  ChoiceTags(this.bookTags,this.params,this.aa);
   @override
   _ChoiceTagsState createState() => _ChoiceTagsState();
 }
@@ -227,7 +235,7 @@ class _ChoiceTagsState extends State<ChoiceTags> {
               "isEnd":widget.params['isEnd'][0],
               "cateId":_selectTags.toString().replaceAll("[","").replaceAll("]", "")
             });
-            //DialogWidget.showSuccess(context,code:200, title:'开始爬取中',desc: "请等待...");
+            widget.aa();
             Navigator.pop(context);
           },
           child: Container(

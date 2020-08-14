@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 20:36:33
- * @LastEditTime: 2020-08-11 21:52:31
+ * @LastEditTime: 2020-08-14 18:10:54
  */
 
 import 'package:dolphin_read/common/utils/utils.dart';
@@ -49,7 +49,7 @@ class UserSelectGenderPage extends StatelessWidget {
                       GestureDetector(
                         onTap: (){},
                         child: Icon(
-                          // IconData(0xe608,fontFamily: 'CustomIcon'),
+                          //IconData(0xe608,fontFamily: 'CustomIcon'),
                           Icons.gradient,
                           color: ColorsUtil.hexToColor('#448AFF'),
                           size: duSetFontSize(180),
@@ -61,7 +61,7 @@ class UserSelectGenderPage extends StatelessWidget {
                           onTap: (){},
                           child: Icon(
                             Icons.gradient,
-                            // IconData(0xe611,fontFamily: 'CustomIcon'),
+                            //IconData(0xe611,fontFamily: 'CustomIcon'),
                             color: ColorsUtil.hexToColor('#FF5252'),
                             size: duSetFontSize(180),
                           ),

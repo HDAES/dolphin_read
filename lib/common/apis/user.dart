@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-07 20:55:25
- * @LastEditTime: 2020-08-07 21:06:37
+ * @LastEditTime: 2020-08-14 14:24:35
  */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/values/values.dart';
@@ -25,13 +25,12 @@ class UserApi{
   }
 
   //历史记录
-  static Future<UserHistoryModel> getHistory({@required BuildContext context,params}) async{
-    print(params);
+  static Future<UserHistoryModel> getHistory({@required BuildContext context,params,refresh}) async{
      var response = await HttpUtil().get(
       '/api/user/book/history',
       context: context,
       params: params,
-      refresh: true
+      refresh: refresh
     );
     return UserHistoryModel.fromJson(response);
   }

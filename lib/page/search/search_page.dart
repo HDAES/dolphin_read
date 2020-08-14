@@ -94,7 +94,7 @@ class _SearchPageState extends State<SearchPage> {
                       }
                     );
                   }).toList()
-                ):Padding(padding: EdgeInsets.only(top:10),child: Text('暂无历史记录'),)
+                ):Padding(padding: EdgeInsets.only(top:10),child: Text('暂无历史记录')) 
               ],
             ),
           )
@@ -115,8 +115,17 @@ class _SearchPageState extends State<SearchPage> {
               return SearchBookItemWidget(bookList[item]);
             }
           )
-        )
-      
+        ),
+      floatingActionButton:FloatingActionButton(
+        heroTag: 'homeFab',
+        key: ValueKey(Icons.menu),
+        onPressed: () {
+          _choicePlatform(context);
+        },
+        child: Icon(
+          Icons.menu,
+        ),
+      )
     );
   }
 

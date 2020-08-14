@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-14 09:26:36
+ * @LastEditTime: 2020-08-14 15:56:52
+ */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
 import 'package:dolphin_read/model/user_history.dart';
@@ -15,7 +21,6 @@ class HistoryBookItemWidget extends StatelessWidget {
       },
       child: Container(
         width: duSetHeight(750),
-        color: Colors.white,
         padding: EdgeInsets.only(left:10,right:10,bottom:10),
         child:Row(
           children: [
@@ -33,7 +38,7 @@ class HistoryBookItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(item.bookName,
-                    style: TextStyle(fontSize: duSetFontSize(40),color: Colors.black),
+                    style: TextStyle(fontSize: duSetFontSize(40)),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -41,7 +46,6 @@ class HistoryBookItemWidget extends StatelessWidget {
                    Text('最新章节：${item.updateTitle}',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Colors.black54),
                   ),
                   Row(
                     children: [

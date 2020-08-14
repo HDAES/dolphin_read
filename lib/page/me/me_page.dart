@@ -2,14 +2,14 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-12 22:12:54
- * @LastEditTime: 2020-08-13 23:00:02
+ * @LastEditTime: 2020-08-14 15:57:09
  */
 import 'dart:math';
 
 import 'package:dolphin_read/common/widgets/widgets.dart';
+import 'package:dolphin_read/global.dart';
 import 'package:dolphin_read/provider/theme_model.dart';
 import 'package:dolphin_read/routers/routes.dart';
-import 'package:dolphin_read/common/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +63,7 @@ class UserHeaderWidget extends StatelessWidget {
                 tag: 'loginLogo',
                 child: ClipOval(
                   child: Image.asset(
-                      "assets/images/no-data.png" ,
+                      "assets/images/logo.jpg" ,
                       fit: BoxFit.cover,
                       width: 80,
                       height: 80,
@@ -77,6 +77,11 @@ class UserHeaderWidget extends StatelessWidget {
             ),
             SizedBox(
               height: 20,
+            ),
+            Text('${Global.profile.data.user.nickname}',
+              style:Theme.of(context).textTheme.body1.copyWith(
+              color: Colors.white.withAlpha(200),
+              decoration: TextDecoration.underline)
             ),
           ],
         ),
@@ -122,13 +127,13 @@ class UserListWidget extends StatelessWidget {
                 activeColor: Theme.of(context).accentColor,
                 value: Theme.of(context).brightness == Brightness.dark,
                 onChanged: (value) {
-                 
+                  switchDarkMode(context);
                 }),
           ),
           SettingThemeWidget(),
           ListTile(
             title: Text('设置'),
-            onTap: () {},
+            onTap: () { Routes.navigateTo(context, Routes.version);},
             leading: Icon(
               Icons.settings,
               color: iconColor,

@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-07 20:55:25
- * @LastEditTime: 2020-08-07 22:31:46
+ * @LastEditTime: 2020-08-14 09:54:03
  */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
@@ -22,7 +22,7 @@ class SearchBookItemWidget extends StatelessWidget {
       },
       child: Container(
         width: duSetWidth(750),
-        color: Colors.white,
+        color: Theme.of(context).scaffoldBackgroundColor,
         padding: EdgeInsets.only(left:10,right:10,bottom:10),
         child: Row(
           children: <Widget>[
@@ -40,18 +40,17 @@ class SearchBookItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(item.bookName,
-                    style: TextStyle(fontSize: duSetFontSize(40),color: Colors.black),
+                    style: TextStyle(fontSize: duSetFontSize(40)),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text('作者：${item.panName}',style: TextStyle(color: Colors.black87)),
-                  Text('是否完结：${isEnd(item.isEnd)}',style: TextStyle(color: Colors.black87)),
+                  Text('作者：${item.panName}'),
+                  Text('是否完结：${isEnd(item.isEnd)}'),
                   Text('最新章节：${item.newChapterTitle}',
                     maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Colors.black54),
+                    overflow: TextOverflow.ellipsis
                   ),
-                  Text('平台：${formatPlatform(item.type)}',style: TextStyle(color: Colors.black54)),
+                  Text('平台：${formatPlatform(item.type)}'),
                 ],
               ),
             )

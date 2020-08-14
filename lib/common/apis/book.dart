@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-09 14:19:46
- * @LastEditTime: 2020-08-09 22:03:00
+ * @LastEditTime: 2020-08-14 16:48:06
  */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/model/book_catalog.dart';
@@ -19,6 +19,7 @@ class BookApi {
       params:params,
       refresh: true
     );
+    
     return BookInfoModel.fromJson(response);
   }
 

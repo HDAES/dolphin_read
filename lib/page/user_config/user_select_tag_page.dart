@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 20:36:33
- * @LastEditTime: 2020-08-11 21:52:52
+ * @LastEditTime: 2020-08-14 18:11:07
  */
 
 import 'package:dolphin_read/common/utils/utils.dart';
@@ -112,7 +112,7 @@ class _UserSelectTagsPageState extends State<UserSelectTagsPage> {
                         children: <Widget>[
                           Icon(
                             Icons.gradient,
-                            // IconData(0xe636,fontFamily: 'CustomIcon'), 
+                            //IconData(0xe636,fontFamily: 'CustomIcon'), 
                             color: ColorsUtil.hexToColor('#448AFF'),
                             size: duSetFontSize(40),
                           ),
@@ -149,7 +149,7 @@ class _UserSelectTagsPageState extends State<UserSelectTagsPage> {
                         children: <Widget>[
                           Icon(
                             Icons.gradient,
-                            // IconData(0xe636,fontFamily: 'CustomIcon'), 
+                            //IconData(0xe636,fontFamily: 'CustomIcon'), 
                             color: ColorsUtil.hexToColor('#FF5252'),
                             size: duSetFontSize(40),
                           ),
