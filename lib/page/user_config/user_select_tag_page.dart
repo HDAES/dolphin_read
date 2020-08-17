@@ -2,10 +2,11 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 20:36:33
- * @LastEditTime: 2020-08-14 18:11:07
+ * @LastEditTime: 2020-08-17 21:31:25
  */
 
 import 'package:dolphin_read/common/utils/utils.dart';
+import 'package:dolphin_read/common/values/values.dart';
 import 'package:dolphin_read/common/widgets/toast.dart';
 import 'package:dolphin_read/routers/routes.dart';
 import 'package:flutter/material.dart';
@@ -111,8 +112,7 @@ class _UserSelectTagsPageState extends State<UserSelectTagsPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(
-                            Icons.gradient,
-                            //IconData(0xe636,fontFamily: 'CustomIcon'), 
+                            IconFonts.male,
                             color: ColorsUtil.hexToColor('#448AFF'),
                             size: duSetFontSize(40),
                           ),
@@ -148,8 +148,7 @@ class _UserSelectTagsPageState extends State<UserSelectTagsPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(
-                            Icons.gradient,
-                            //IconData(0xe636,fontFamily: 'CustomIcon'), 
+                            IconFonts.female, 
                             color: ColorsUtil.hexToColor('#FF5252'),
                             size: duSetFontSize(40),
                           ),
