@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-02 22:35:57
- * @LastEditTime: 2020-08-02 23:09:57
+ * @LastEditTime: 2020-08-17 21:08:33
  */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/routers/routes.dart';
@@ -116,10 +116,8 @@ class _FlareSignPageState extends State<FlareSignPage> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   onPressed: () =>{
-                                      //_signInController.setPassword('bears'),
-                                      _signInController.submitPassword(context),
+                                    _signInController.submitPassword(context),
                                   }
-                                      
                                 ),
                               ],
                             ),
@@ -134,7 +132,7 @@ class _FlareSignPageState extends State<FlareSignPage> {
                 top:getStatusBarHeight()+10,
                 right: 10,
                 child: GestureDetector(
-                  onTap: ()=>{Routes.navigateTo(context, Routes.selectGender)},
+                  onTap: ()=>{Routes.navigateTo(context, Routes.index)},
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[

@@ -1,11 +1,18 @@
 /*
  * @Descripttion: 
  * @Author: Hades
+ * @Date: 2020-08-14 21:05:51
+ * @LastEditTime: 2020-08-17 21:17:04
+ */
+/*
+ * @Descripttion: 
+ * @Author: Hades
  * @Date: 2020-08-03 20:36:33
  * @LastEditTime: 2020-08-14 18:10:54
  */
 
 import 'package:dolphin_read/common/utils/utils.dart';
+import 'package:dolphin_read/common/values/values.dart';
 import 'package:dolphin_read/routers/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -47,10 +54,11 @@ class UserSelectGenderPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       GestureDetector(
-                        onTap: (){},
+                        onTap: (){
+                          Routes.navigateTo(context, Routes.selectTags);
+                        },
                         child: Icon(
-                          //IconData(0xe608,fontFamily: 'CustomIcon'),
-                          Icons.gradient,
+                          IconFonts.male,
                           color: ColorsUtil.hexToColor('#448AFF'),
                           size: duSetFontSize(180),
                         ),
@@ -58,10 +66,11 @@ class UserSelectGenderPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left:duSetWidth(100)),
                         child: GestureDetector(
-                          onTap: (){},
+                          onTap: (){
+                            Routes.navigateTo(context, Routes.selectTags);
+                          },
                           child: Icon(
-                            Icons.gradient,
-                            //IconData(0xe611,fontFamily: 'CustomIcon'),
+                            IconFonts.female,
                             color: ColorsUtil.hexToColor('#FF5252'),
                             size: duSetFontSize(180),
                           ),

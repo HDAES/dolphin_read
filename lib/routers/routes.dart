@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 20:36:33
- * @LastEditTime: 2020-08-03 22:15:39
+ * @LastEditTime: 2020-08-16 12:38:56
  */
 import 'package:dolphin_read/routers/application.dart';
 import 'package:fluro/fluro.dart';
@@ -12,6 +12,7 @@ import 'package:dolphin_read/routers/router_handler.dart';
 class Routes {
   static Router router;
 
+  static String login = '/login';
   static String selectGender = '/selectGender';
   static String selectTags = '/selectTags';
   static String index = '/index';
@@ -20,6 +21,7 @@ class Routes {
   static String book = '/book';
   static String history  = '/history';
   static String version ='/version';
+  static String setSystem ='/set';
 
    static void configRoutes(Router router){
     router.notFoundHandler = new Handler(
@@ -29,6 +31,7 @@ class Routes {
       }
     );
 
+    router.define(login, handler: loginHandler);
     router.define(selectGender, handler: selectGenderHandler);   //选择性别
     router.define(selectTags, handler: selectTagsHandler);   //选择性别
     router.define(index, handler: indexHandler);   //选择性别
@@ -37,6 +40,7 @@ class Routes {
     router.define(book, handler: bookHandler); 
     router.define(history, handler: historyHandler); 
     router.define(version, handler: versionHandler);
+    router.define(setSystem, handler: setHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配

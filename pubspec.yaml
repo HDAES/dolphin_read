@@ -51,8 +51,9 @@ dependencies:
   provider: ^4.3.2
   #
   flutter_staggered_grid_view: ^0.3.2
+  intl: ^0.15.7
 dev_dependencies:
-
+  intl_translation: ^0.17.2
   
 
   flutter_test:
@@ -77,8 +78,12 @@ flutter:
 
   
   fonts:
-    - family: CustomIcon
+    - family: iconfont
       fonts:
         - asset: assets/fonts/iconfont.ttf
+    - family: kuaile
+      fonts:
+        - asset: assets/fonts/ZCOOLKuaiLe-Regular.ttf
+        
 
 

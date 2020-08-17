@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-14 12:47:01
- * @LastEditTime: 2020-08-14 16:24:24
+ * @LastEditTime: 2020-08-17 21:07:04
  */
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/utils/utils.dart';
@@ -78,7 +78,7 @@ class _RecommendPageState extends State<RecommendPage> with AutomaticKeepAliveCl
                 setState(() {
                   page = page + 1;
                 });
-                getIndex(context,false);
+                getIndex(context,true);
               }:null,
               controller: _controller,
               child:StaggeredGridView.countBuilder(

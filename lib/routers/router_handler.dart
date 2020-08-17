@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 20:36:33
- * @LastEditTime: 2020-08-03 22:15:17
+ * @LastEditTime: 2020-08-16 12:38:07
  */
 import 'package:dolphin_read/page/book/book_page.dart';
 import 'package:dolphin_read/page/book_info/book_info_page.dart';
@@ -11,6 +11,7 @@ import 'package:dolphin_read/page/login/flare_sign_page.dart';
 import 'package:dolphin_read/page/me/history/history_page.dart';
 import 'package:dolphin_read/page/me/version/version_page.dart';
 import 'package:dolphin_read/page/search/search_page.dart';
+import 'package:dolphin_read/page/set/set_page.dart';
 import 'package:dolphin_read/page/user_config/user_select_gender_page.dart';
 import 'package:dolphin_read/page/user_config/user_select_tag_page.dart';
 import 'package:flutter/material.dart';
@@ -79,4 +80,12 @@ Handler versionHandler = Handler(
     return VersionPage();
   }
 );
+
+//设置
+Handler setHandler = Handler(
+  handlerFunc: (BuildContext context, Map<String,List<String>> params){
+    return SetPage();
+  }
+);
+
 

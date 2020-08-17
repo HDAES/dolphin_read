@@ -2,12 +2,15 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-12 22:12:54
- * @LastEditTime: 2020-08-14 15:57:09
+ * @LastEditTime: 2020-08-17 21:16:20
  */
 import 'dart:math';
 
+import 'package:dolphin_read/common/utils/utils.dart';
+import 'package:dolphin_read/common/values/values.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
 import 'package:dolphin_read/global.dart';
+import 'package:dolphin_read/model/user.dart';
 import 'package:dolphin_read/provider/theme_model.dart';
 import 'package:dolphin_read/routers/routes.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,7 +33,7 @@ class _MePageState extends State<MePage> {
               IconButton(
                 tooltip: "hello",
                 icon: Icon(Icons.exit_to_app),
-                onPressed: (){},
+                onPressed: ()=>signOut(),
               ),
               SizedBox.shrink()
             ],
@@ -42,8 +45,14 @@ class _MePageState extends State<MePage> {
           UserListWidget()
         ],
       )
-      
     );
+  }
+  //退出登录
+  void signOut(){
+    StorageUtil().remove(STORAGE_USER_PROFILE_KEY);
+    Toast.show('退出成功！');
+    Routes.navigateTo(context, Routes.login);
+    Global.profile=UserModel();
   }
 }
 
@@ -59,35 +68,35 @@ class UserHeaderWidget extends StatelessWidget {
           children: <Widget>[
             Icon(Icons.expand_more),
             InkWell(
+              onTap: (){ Global.profile.data?.user?.nickname?? Routes.navigateTo(context, Routes.login);},
               child: Hero(
                 tag: 'loginLogo',
                 child: ClipOval(
                   child: Image.asset(
-                      "assets/images/logo.jpg" ,
-                      fit: BoxFit.cover,
-                      width: 80,
-                      height: 80,
-                      color: Theme.of(context)
-                              .accentColor
-                              .withAlpha(200),
-                      // https://api.flutter.dev/flutter/dart-ui/BlendMode-class.html
-                      colorBlendMode: BlendMode.colorDodge),
+                    "assets/images/logo.jpg" ,
+                    fit: BoxFit.cover,
+                    width: 80,
+                    height: 80,
+                    color: Theme.of(context).accentColor.withAlpha(200),
+                    colorBlendMode: BlendMode.colorDodge),
                 ),
               ),
             ),
             SizedBox(
               height: 20,
             ),
-            Text('${Global.profile.data.user.nickname}',
+            Text('${Global.profile.data?.user?.nickname??'登录'}',
               style:Theme.of(context).textTheme.body1.copyWith(
-              color: Colors.white.withAlpha(200),
-              decoration: TextDecoration.underline)
+              color: Colors.white.withAlpha(200))
             ),
           ],
         ),
       ),
     );
   }
+
+  //头像点击
+  
 }
 
 class UserListWidget extends StatelessWidget {
@@ -133,7 +142,7 @@ class UserListWidget extends StatelessWidget {
           SettingThemeWidget(),
           ListTile(
             title: Text('设置'),
-            onTap: () { Routes.navigateTo(context, Routes.version);},
+            onTap: () { Routes.navigateTo(context, Routes.setSystem);},
             leading: Icon(
               Icons.settings,
               color: iconColor,
@@ -159,18 +168,13 @@ class UserListWidget extends StatelessWidget {
   void switchDarkMode(BuildContext context) {
     if (MediaQuery.of(context).platformBrightness ==
         Brightness.dark) {
-           print('123');
     } else {
-      print('123');
       Provider.of<ThemeModel>(context,listen: false).switchTheme(
           userDarkMode:
               Theme.of(context).brightness == Brightness.light);
     }
   }
 }
-
-
-
 
 class SettingThemeWidget extends StatelessWidget {
   SettingThemeWidget();

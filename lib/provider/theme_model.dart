@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-13 22:28:16
- * @LastEditTime: 2020-08-13 22:47:47
+ * @LastEditTime: 2020-08-16 12:36:20
  */
 
 import 'dart:math';
@@ -119,6 +119,19 @@ class ThemeModel with ChangeNotifier {
     );
     return themeData;
   }
+
+
+  // /// 根据索引获取字体名称,这里牵涉到国际化
+  // static String fontName(index, context) {
+  //   switch (index) {
+  //     case 0:
+  //       return S.of(context).autoBySystem;
+  //     case 1:
+  //       return S.of(context).fontKuaiLe;
+  //     default:
+  //       return '';
+  //   }
+  // }
 
    /// 数据持久化到
    saveTheme(bool userDarkMode, MaterialColor themeColor) async {
