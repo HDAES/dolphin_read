@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-14 12:47:01
- * @LastEditTime: 2020-08-17 21:07:04
+ * @LastEditTime: 2020-08-18 16:58:42
  */
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/utils/utils.dart';
@@ -65,13 +65,14 @@ class _RecommendPageState extends State<RecommendPage> with AutomaticKeepAliveCl
         builder: (BuildContext context, AsyncSnapshot snapshot){
           if(snapshot.hasData){
             return EasyRefresh(
-              header: MaterialHeader(),
+              header: BezierCircleHeader(color: Colors.white,backgroundColor: Theme.of(context).primaryColor),
               footer: BallPulseFooter(),
               onRefresh:() async {
                 setState(() {
                   page = 1;
                 });
                 getIndex(context,true);
+                Toast.show('刷新成功！');
               },
               onLoad:_enableLoad?() async {
                 print('Load');
@@ -144,10 +145,6 @@ class FlipViewItem extends StatefulWidget {
 class _FlipViewItemState extends State<FlipViewItem> with SingleTickerProviderStateMixin{
   AnimationController _animationController;
   Animation<double> _curvedAnimation;
-
-  @override
-  bool get wantKeepAlive => true;
-
   @override
   void initState() {
      _animationController = AnimationController(

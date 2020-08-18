@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-02 22:35:57
- * @LastEditTime: 2020-08-17 21:08:33
+ * @LastEditTime: 2020-08-18 10:27:44
  */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/routers/routes.dart';
@@ -132,7 +132,7 @@ class _FlareSignPageState extends State<FlareSignPage> {
                 top:getStatusBarHeight()+10,
                 right: 10,
                 child: GestureDetector(
-                  onTap: ()=>{Routes.navigateTo(context, Routes.index)},
+                  onTap: ()=>{Routes.navigateTo(context, Routes.index,clear: true)},
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[

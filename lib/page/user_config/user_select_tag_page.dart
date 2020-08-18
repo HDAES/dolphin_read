@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 20:36:33
- * @LastEditTime: 2020-08-17 21:31:25
+ * @LastEditTime: 2020-08-18 10:27:30
  */
 
 import 'package:dolphin_read/common/utils/utils.dart';
@@ -76,7 +76,7 @@ class _UserSelectTagsPageState extends State<UserSelectTagsPage> {
             top:getStatusBarHeight()+10,
             right: 10,
             child: GestureDetector(
-              onTap: ()=>{Routes.navigateTo(context, Routes.index)},
+              onTap: ()=>{Routes.navigateTo(context, Routes.index,clear: true)},
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[

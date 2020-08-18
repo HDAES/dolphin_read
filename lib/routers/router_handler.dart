@@ -2,13 +2,13 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 20:36:33
- * @LastEditTime: 2020-08-16 12:38:07
+ * @LastEditTime: 2020-08-18 16:13:16
  */
 import 'package:dolphin_read/page/book/book_page.dart';
 import 'package:dolphin_read/page/book_info/book_info_page.dart';
 import 'package:dolphin_read/page/index_page.dart';
 import 'package:dolphin_read/page/login/flare_sign_page.dart';
-import 'package:dolphin_read/page/me/history/history_page.dart';
+import 'package:dolphin_read/page/me/follow/follow_page.dart';
 import 'package:dolphin_read/page/me/version/version_page.dart';
 import 'package:dolphin_read/page/search/search_page.dart';
 import 'package:dolphin_read/page/set/set_page.dart';
@@ -67,12 +67,7 @@ Handler bookHandler = Handler(
 );
 
 
-//历史记录
-Handler historyHandler = Handler(
-  handlerFunc: (BuildContext context, Map<String,List<String>> params){
-    return HistoryPage();
-  }
-);
+
 
 //版本切换
 Handler versionHandler = Handler(
@@ -85,6 +80,14 @@ Handler versionHandler = Handler(
 Handler setHandler = Handler(
   handlerFunc: (BuildContext context, Map<String,List<String>> params){
     return SetPage();
+  }
+);
+
+//收藏
+
+Handler followHandler = Handler(
+  handlerFunc: (BuildContext context, Map<String,List<String>> params){
+    return FollowPage();
   }
 );
 

@@ -2,22 +2,22 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-14 09:26:36
- * @LastEditTime: 2020-08-18 16:41:20
+ * @LastEditTime: 2020-08-18 16:41:07
  */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
-import 'package:dolphin_read/model/user_history.dart';
+import 'package:dolphin_read/model/follows.dart';
 import 'package:dolphin_read/routers/routes.dart';
 import 'package:flutter/material.dart';
 
-class HistoryBookItemWidget extends StatelessWidget {
-  final HistoryData item;
-  HistoryBookItemWidget(this.item);
+class FollowBookItemWidget extends StatelessWidget {
+  final FollowData item;
+  FollowBookItemWidget(this.item);
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Routes.navigateTo(context, Routes.book,params: {"bookId":item.bookId,"chapterId":item.chapterId});
+        Routes.navigateTo(context, Routes.bookInfo,params: {"bookId":item.bookId,"type":0,"isEnd":item.isEnd});
       },
       child: Container(
         width: duSetHeight(750),
@@ -42,8 +42,8 @@ class HistoryBookItemWidget extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text("阅读至：${item.title}"),
-                  Text('最新章节：${item.updateTitle}',
+                 
+                  Text('最新章节：${item.newChapterTitle}',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),

@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-07 20:55:25
- * @LastEditTime: 2020-08-14 16:56:19
+ * @LastEditTime: 2020-08-18 15:06:10
  */
 
 import 'package:dolphin_read/common/apis/apis.dart';
@@ -12,6 +12,7 @@ import 'package:dolphin_read/model/book_tags.dart';
 import 'package:dolphin_read/page/user_config/user_select_tag_page.dart';
 import 'package:dolphin_read/routers/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
 
 import '../../common/utils/screen.dart';
 
@@ -24,11 +25,11 @@ class BookInfoPage extends StatefulWidget {
 
 class _BookInfoPageState extends State<BookInfoPage> {
 
-  
+  var  _futureBuilderFuture;
   bool isHave;
    @override
   void initState() {
-    // TODO: implement initState
+     _futureBuilderFuture= getBookInfo(context);
     super.initState();
   } 
   @override
@@ -36,17 +37,17 @@ class _BookInfoPageState extends State<BookInfoPage> {
     print(widget.params);
     return Scaffold(
         appBar: AppBar(
-          title: Text(''),
+          title: Text('详情'),
         ),
         body:FutureBuilder(
-          future: getBookInfo(context),
+          future: _futureBuilderFuture,
           builder: (BuildContext context, AsyncSnapshot snapshot){
             if (snapshot.hasData) {
               isHave = snapshot.data.data.have;
               return Stack(
                 children: <Widget>[
                   ListView(
-                    padding: EdgeInsets.only(left:duSetWidth(20),right: duSetWidth(20)),
+                    padding: EdgeInsets.only(left:duSetWidth(20),right: duSetWidth(20),top:10),
                     children: <Widget>[
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,11 +62,22 @@ class _BookInfoPageState extends State<BookInfoPage> {
                             height: duSetWidth(340),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
-                                Text(
-                                  snapshot.data.data.bookName,
-                                  style: TextStyle(fontSize: duSetFontSize(48)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: duSetWidth(300),
+                                      child: Text(
+                                        snapshot.data.data.bookName,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(fontSize: duSetFontSize(48),),
+                                      ),
+                                    ),
+                                    likeBottn(context,snapshot.data.data.follow)
+                                  ],
                                 ),
                                 Text(
                                   '作者：${snapshot.data.data.penName}',
@@ -75,10 +87,9 @@ class _BookInfoPageState extends State<BookInfoPage> {
                                   ),
                                 ),
                                 Text('是否完结：${isEnd(widget.params['isEnd'][0])}'),
-                                Text('最新章节：${widget.params['newChapterTitle'][0]}',
+                                Text('最新章节：${snapshot.data.data.newChapterTitle??'未知'}',
                                   maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  
+                                  overflow: TextOverflow.ellipsis
                                 )
                               ],
                             ),
@@ -136,9 +147,6 @@ class _BookInfoPageState extends State<BookInfoPage> {
           }
         )
       );
-    
-
-    
   }
   
   void rightTap(context,item) async{
@@ -168,8 +176,36 @@ class _BookInfoPageState extends State<BookInfoPage> {
         );
       }
   }
+  
+  //收藏Btton
+  Widget likeBottn(context,isLiked){
+    return  LikeButton(
+      circleColor:CircleColor(start: Color(0xff00ddff), end: Color(0xff0099cc)),
+      bubblesColor: BubblesColor(
+      dotPrimaryColor: Color(0xff33b5e5),
+      dotSecondaryColor: Color(0xff0099cc),
+      ),
+      isLiked: isLiked,
+      likeBuilder: (bool isLiked) {
+        return Icon(
+          Icons.favorite,
+          color: isLiked ? Colors.pinkAccent: Theme.of(context).primaryColor,
+        );
+      },
+      onTap: (bool isLiked) async{
+        var response = await UserApi.postFollow(context:context,params: {
+          "bookId":widget.params['bookId'][0],
+        });
+        if(response['code']==200){
+          Toast.show(response['message']);
+        }
+        return !isLiked;
+      },
+    );
+  }
   //请求书籍详情
   Future getBookInfo(context) async{
+    print(widget.params['bookId'][0]);
     return  BookApi.getBookInfo(context: context,
       params: {
         "bookId":widget.params['bookId'][0],

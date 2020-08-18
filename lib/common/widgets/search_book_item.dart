@@ -15,7 +15,7 @@ class SearchBookItemWidget extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: (){ 
         print(item.bookId);
         Routes.navigateTo(context, Routes.bookInfo,params: item.toJson());

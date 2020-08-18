@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-14 09:26:36
+ * @LastEditTime: 2020-08-18 12:04:38
+ */
 class BookInfoModel {
   int code;
   String message;
@@ -31,7 +37,8 @@ class Data {
   bool update;
   String bookId;
   String chapterId;
-
+  bool follow;
+  String newChapterTitle;
   Data(
       {this.image,
       this.have,
@@ -40,6 +47,8 @@ class Data {
       this.bookDesc,
       this.bookId,
       this.update,
+      this.follow,
+      this.newChapterTitle,
       this.chapterId});
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -50,6 +59,8 @@ class Data {
     bookDesc = json['bookDesc'];
     bookId = json['bookId'];
     update = json['update'];
+    follow = json['follow'];
+    newChapterTitle = json['newChapterTitle'];
     chapterId = json['chapterId'];
   }
 
@@ -62,6 +73,8 @@ class Data {
     data['bookDesc'] = this.bookDesc;
     data['bookId'] = this.bookId;
     data['update'] = this.update;
+    data['follow'] = this.follow;
+    data['newChapterTitle'] = this.newChapterTitle;
     data['chapterId'] = this.chapterId;
     return data;
   }

@@ -2,10 +2,11 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-12 22:12:54
- * @LastEditTime: 2020-08-17 21:16:20
+ * @LastEditTime: 2020-08-18 16:14:44
  */
 import 'dart:math';
 
+import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/values/values.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
@@ -52,6 +53,7 @@ class _MePageState extends State<MePage> {
     StorageUtil().remove(STORAGE_USER_PROFILE_KEY);
     Toast.show('退出成功！');
     Routes.navigateTo(context, Routes.login);
+    HttpUtil().clearCache();
     Global.profile=UserModel();
   }
 }
@@ -67,6 +69,9 @@ class UserHeaderWidget extends StatelessWidget {
         child:  Column(
           children: <Widget>[
             Icon(Icons.expand_more),
+            SizedBox(
+              height: 30,
+            ),
             InkWell(
               onTap: (){ Global.profile.data?.user?.nickname?? Routes.navigateTo(context, Routes.login);},
               child: Hero(
@@ -110,7 +115,7 @@ class UserListWidget extends StatelessWidget {
           ListTile(
             title: Text('收藏'),
             onTap: () {
-              
+              Routes.navigateTo(context, Routes.follow);
             },
             leading: Icon(
               Icons.favorite_border,
@@ -145,15 +150,6 @@ class UserListWidget extends StatelessWidget {
             onTap: () { Routes.navigateTo(context, Routes.setSystem);},
             leading: Icon(
               Icons.settings,
-              color: iconColor,
-            ),
-            trailing: Icon(Icons.chevron_right),
-          ),
-          ListTile(
-            title: Text('检查跟新'),
-            onTap: () {},
-            leading: Icon(
-              Icons.system_update,
               color: iconColor,
             ),
             trailing: Icon(Icons.chevron_right),

@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-14 10:29:08
- * @LastEditTime: 2020-08-14 16:14:55
+ * @LastEditTime: 2020-08-18 14:41:41
  */
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
@@ -29,7 +29,7 @@ class _BookShelfPageState extends State<BookShelfPage>  with AutomaticKeepAliveC
 
   @override
   void initState() {
-     _futureBuilderFuture= getUserHistory(context,false);
+    _futureBuilderFuture= getUserHistory(context,false);
     super.initState();
   }
   
@@ -78,6 +78,7 @@ class _BookShelfPageState extends State<BookShelfPage>  with AutomaticKeepAliveC
   }
 
    Future getUserHistory(context,refresh) async{
+    
     UserHistoryModel  userHistory = await UserApi.getHistory(context: context,params: {"page":page,"size":size},refresh: refresh);
     
     historyList.addAll(userHistory.data.list);

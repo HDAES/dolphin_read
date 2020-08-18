@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-09 14:19:46
- * @LastEditTime: 2020-08-09 16:02:54
+ * @LastEditTime: 2020-08-18 11:21:45
  */
 class BookContentModel {
   int code;
@@ -33,6 +33,7 @@ class Data {
   String lastTitle;
   String nextTitle;
   int lastId;
+  int idx;
   String title;
   dynamic content;
 
@@ -42,6 +43,7 @@ class Data {
       this.nextTitle,
       this.lastId,
       this.title,
+      this.idx,
       this.content});
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -50,6 +52,7 @@ class Data {
     nextTitle = json['nextTitle'];
     lastId = json['lastId'];
     title = json['title'];
+    idx = json['idx'];
     content = json['content'];
   }
 
@@ -60,6 +63,7 @@ class Data {
     data['nextTitle'] = this.nextTitle;
     data['lastId'] = this.lastId;
     data['title'] = this.title;
+    data['idx'] = this.idx;
     data['content'] = this.content;
     return data;
   }

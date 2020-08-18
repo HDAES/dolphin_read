@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 20:36:33
- * @LastEditTime: 2020-08-16 12:38:56
+ * @LastEditTime: 2020-08-18 16:14:07
  */
 import 'package:dolphin_read/routers/application.dart';
 import 'package:fluro/fluro.dart';
@@ -19,9 +19,9 @@ class Routes {
   static String search = '/search';
   static String bookInfo = '/bookInfo';
   static String book = '/book';
-  static String history  = '/history';
   static String version ='/version';
   static String setSystem ='/set';
+  static String follow = '/follow';
 
    static void configRoutes(Router router){
     router.notFoundHandler = new Handler(
@@ -38,9 +38,9 @@ class Routes {
     router.define(search, handler: searchHandler);   //选择性别
     router.define(bookInfo, handler: bookInfoHandler);   //选择性别
     router.define(book, handler: bookHandler); 
-    router.define(history, handler: historyHandler); 
     router.define(version, handler: versionHandler);
     router.define(setSystem, handler: setHandler);
+    router.define(follow, handler: followHandler);
   }
 
   // 对参数进行encode，解决参数中有特殊字符，影响fluro路由匹配

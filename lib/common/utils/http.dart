@@ -10,10 +10,11 @@ class HttpUtil {
   factory HttpUtil() => _instance;
 
   static Dio dio;
-
- 
+  
+ static DioCacheManager _dioCacheManager = DioCacheManager(CacheConfig(baseUrl: SERVER_API_URL));
 
   HttpUtil._internal() {
+    
     BaseOptions options = new BaseOptions(
       baseUrl: SERVER_API_URL,
       connectTimeout: 10000,
@@ -25,7 +26,7 @@ class HttpUtil {
     //加载配置
     dio = new Dio(options);
     // 添加拦截器
-    dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: SERVER_API_URL)).interceptor);
+    dio.interceptors.add(_dioCacheManager.interceptor);
     dio.interceptors.add(InterceptorsWrapper(onRequest: (RequestOptions options) {
       return options; //continue
     }, onResponse: (Response response) {
@@ -53,7 +54,13 @@ class HttpUtil {
   setbaseUrl(url){
    dio.options.baseUrl = url;
   }
+  
+
+  clearCache(){
+    _dioCacheManager.clearAll();
+  }
  
+  
 
   /// 添加头部信息
   Map<String, dynamic> getAuthorizationHeader() {

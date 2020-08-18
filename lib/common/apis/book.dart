@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-09 14:19:46
- * @LastEditTime: 2020-08-14 16:48:06
+ * @LastEditTime: 2020-08-18 12:09:12
  */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/model/book_catalog.dart';
@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 
 class BookApi {
   static Future<BookInfoModel> getBookInfo({@required BuildContext context,params}) async{
+    print('==============书籍详情：$params============');
     var response = await HttpUtil().get(
       '/api/web/book/info',
       context: context,

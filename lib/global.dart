@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-14 09:26:36
+ * @LastEditTime: 2020-08-18 14:01:57
+ */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/values/values.dart';
 import 'package:dolphin_read/model/user.dart';
