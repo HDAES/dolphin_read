@@ -1,10 +1,14 @@
+/*
+ * @Descripttion: 
+ * @Author: Hades
+ * @Date: 2020-08-14 09:26:36
+ * @LastEditTime: 2020-10-14 14:24:06
+ */
 class UserModel {
   int code;
   String message;
   Data data;
-
   UserModel({this.code, this.message, this.data});
-
   UserModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     message = json['message'];
@@ -26,7 +30,6 @@ class Data {
   String authorization;
   String authorizationType;
   User user;
-
   Data({this.authorization, this.authorizationType, this.user});
 
   Data.fromJson(Map<String, dynamic> json) {

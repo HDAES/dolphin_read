@@ -89,7 +89,6 @@ class ImageLoadView extends StatelessWidget {
             imageUrl: path,
             fit: fit,
             errorWidget: (context, url, error)=>Image.asset(placeholder));
-
         break;
       case ImageType.assets:
         imageWidget = FadeInImage(

@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 22:14:17
- * @LastEditTime: 2020-08-14 16:24:38
+ * @LastEditTime: 2020-10-14 14:29:51
  */
 import 'package:dolphin_read/common/widgets/fluid_nav_bar/fluid_nav_bar.dart';
 import 'package:dolphin_read/page/bookshelf/bookshelf_page.dart';
@@ -47,7 +47,6 @@ class _IndexPageState extends State<IndexPage> {
         
       }
       _child = AnimatedSwitcher(
-        
         switchInCurve: Curves.easeOut,
         switchOutCurve: Curves.easeIn,
         duration: Duration(milliseconds: 500),

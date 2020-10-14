@@ -2,9 +2,10 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-14 09:26:36
- * @LastEditTime: 2020-08-18 16:41:20
+ * @LastEditTime: 2020-10-14 14:55:37
  */
 import 'package:dolphin_read/common/utils/utils.dart';
+import 'package:dolphin_read/common/values/values.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
 import 'package:dolphin_read/model/user_history.dart';
 import 'package:dolphin_read/routers/routes.dart';
@@ -21,7 +22,7 @@ class HistoryBookItemWidget extends StatelessWidget {
       },
       child: Container(
         width: duSetHeight(750),
-        padding: EdgeInsets.only(left:10,right:10,bottom:10),
+        padding: EdgeInsets.all(10),
         child:Row(
           children: [
             ImageLoadView(
@@ -38,7 +39,7 @@ class HistoryBookItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(item.bookName,
-                    style: TextStyle(fontSize: duSetFontSize(40)),
+                    style: TextStyle(fontSize: duSetFontSize(36)),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -64,6 +65,9 @@ class HistoryBookItemWidget extends StatelessWidget {
               ),
             )
           ],
+        ),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width:1,color: ColorsValue.spacerColor))
         ),
       ),
     );

@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-14 12:47:01
- * @LastEditTime: 2020-08-18 16:58:42
+ * @LastEditTime: 2020-10-14 15:28:26
  */
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/utils/utils.dart';
@@ -75,7 +75,6 @@ class _RecommendPageState extends State<RecommendPage> with AutomaticKeepAliveCl
                 Toast.show('刷新成功！');
               },
               onLoad:_enableLoad?() async {
-                print('Load');
                 setState(() {
                   page = page + 1;
                 });
@@ -92,7 +91,6 @@ class _RecommendPageState extends State<RecommendPage> with AutomaticKeepAliveCl
                 mainAxisSpacing: 4.0,
                 crossAxisSpacing: 4.0,
               )
-
             );
           }else{
             return SampleListItem(number: 10);
@@ -173,8 +171,10 @@ class _FlipViewItemState extends State<FlipViewItem> with SingleTickerProviderSt
                   height: duSetWidth(453),
                   width: duSetWidth(340),
                 ),
-                Text(widget.item.bookName),
-                Text(widget.item.penName),
+                Padding(
+                  padding: EdgeInsets.only(top:10,bottom: 5),
+                  child: Text(widget.item.bookName,style: TextStyle(fontSize: duSetFontSize(36))),
+                ),
                 Row(
                   children: [
                     for(int i =0;i<widget.item.cateName.length;i++)
