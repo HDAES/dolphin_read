@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-14 12:47:01
- * @LastEditTime: 2020-10-14 15:28:26
+ * @LastEditTime: 2020-10-14 22:06:03
  */
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/utils/utils.dart';
@@ -103,6 +103,7 @@ class _RecommendPageState extends State<RecommendPage> with AutomaticKeepAliveCl
         onPressed: () {
           _scrollController.animateTo(0,
             duration: Duration(milliseconds: 300), curve: Curves.easeOutCubic);
+
         },
         child: Icon(
           Icons.vertical_align_top,
@@ -111,7 +112,8 @@ class _RecommendPageState extends State<RecommendPage> with AutomaticKeepAliveCl
         heroTag: 'homeFab',
         key: ValueKey(Icons.search),
         onPressed: () {
-          Routes.navigateTo(context, Routes.search);
+          //Routes.navigateTo(context, Routes.search);
+          Upgrade.init(context);
         },
         child: Icon(
           Icons.search,

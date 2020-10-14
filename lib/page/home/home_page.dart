@@ -2,9 +2,10 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 22:24:01
- * @LastEditTime: 2020-08-17 21:07:48
+ * @LastEditTime: 2020-10-14 21:51:59
  */
 import 'package:dolphin_read/common/apis/apis.dart';
+import 'package:dolphin_read/common/widgets/widgets.dart';
 import 'package:dolphin_read/page/home/recommend_page.dart';
 import 'package:flutter/material.dart';
 
@@ -24,10 +25,11 @@ class _HomePageState extends State<HomePage>  with SingleTickerProviderStateMixi
 
   @override
   bool get wantKeepAlive => true;
+  
   @override
   void initState() {
-    super.initState();
     _controller = TabController(length: tabs.length, vsync: this);
+    super.initState();
   }
   @override
   void dispose() {

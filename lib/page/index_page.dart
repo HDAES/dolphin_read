@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 22:14:17
- * @LastEditTime: 2020-10-14 14:29:51
+ * @LastEditTime: 2020-10-14 22:05:23
  */
 import 'package:dolphin_read/common/widgets/fluid_nav_bar/fluid_nav_bar.dart';
 import 'package:dolphin_read/page/bookshelf/bookshelf_page.dart';
@@ -26,6 +26,8 @@ class _IndexPageState extends State<IndexPage> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context,width: 750, height: 1334);
+
+    
     return Scaffold(
       body: _child,
       bottomNavigationBar: FluidNavBar(onChange: _handleNavigationChange),

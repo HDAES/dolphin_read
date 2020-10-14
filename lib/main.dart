@@ -13,7 +13,7 @@ import 'package:dolphin_read/routers/routes.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Router;
 import 'package:bot_toast/bot_toast.dart';
 
 import 'global.dart';

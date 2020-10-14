@@ -2,11 +2,11 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 20:36:33
- * @LastEditTime: 2020-08-20 18:25:39
+ * @LastEditTime: 2020-10-14 20:58:59
  */
 import 'package:dolphin_read/routers/application.dart';
 import 'package:fluro/fluro.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Router;
 import 'package:dolphin_read/routers/router_handler.dart';
 
 class Routes {

@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-07 20:55:25
- * @LastEditTime: 2020-10-14 15:47:20
+ * @LastEditTime: 2020-10-14 21:55:03
  */
 
 import 'package:dolphin_read/common/apis/apis.dart';
@@ -28,12 +28,12 @@ class _BookInfoPageState extends State<BookInfoPage> {
   bool isHave;
    @override
   void initState() {
+    
      _futureBuilderFuture= getBookInfo(context);
     super.initState();
   } 
   @override
   Widget build(BuildContext context) {
-    print(widget.params);
     return Scaffold(
         appBar: AppBar(
           title: Text('详情'),
