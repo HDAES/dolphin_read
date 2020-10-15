@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-14 09:26:36
- * @LastEditTime: 2020-08-14 15:44:46
+ * @LastEditTime: 2020-10-15 13:53:20
  */
 
 
@@ -15,9 +15,9 @@ class LoadingWidget extends StatelessWidget {
     return Center(
       child: Card(
         child: Container(
-          width: 80,
-          height: 80,
-          child: SpinKitWave(color: Theme.of(context).primaryColor),
+          width: 40,
+          height: 40,
+          child: SpinKitWave(color: Theme.of(context).primaryColor,size: 30),
         ),
       )
     );

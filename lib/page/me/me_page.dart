@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-12 22:12:54
- * @LastEditTime: 2020-08-18 16:14:44
+ * @LastEditTime: 2020-10-15 15:56:24
  */
 import 'dart:math';
 
@@ -165,6 +165,7 @@ class UserListWidget extends StatelessWidget {
     if (MediaQuery.of(context).platformBrightness ==
         Brightness.dark) {
     } else {
+      Global.light = Theme.of(context).brightness == Brightness.light;
       Provider.of<ThemeModel>(context,listen: false).switchTheme(
           userDarkMode:
               Theme.of(context).brightness == Brightness.light);

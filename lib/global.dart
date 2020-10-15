@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-14 09:26:36
- * @LastEditTime: 2020-08-18 14:01:57
+ * @LastEditTime: 2020-10-15 14:01:06
  */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/values/values.dart';
@@ -20,6 +20,12 @@ class Global {
   ///模式   夜间 / 白天
   static bool light = true;
   static double fontSzie = 18;
+
+  //版本
+  static String version;
+  //平台 ios android
+  static String platform;
+  
   /// init
   static Future init() async {
     
@@ -27,6 +33,8 @@ class Global {
     WidgetsFlutterBinding.ensureInitialized();
     //工具初始
     await StorageUtil.init();
+    //获取包的信息和软件信息
+    await PackageInfoUtil.init();
     HttpUtil();
     // //获取主题颜色
     // appState.getLocalThemeColor(true);
