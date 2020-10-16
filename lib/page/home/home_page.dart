@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 22:24:01
- * @LastEditTime: 2020-10-14 21:51:59
+ * @LastEditTime: 2020-10-16 17:28:17
  */
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage>  with SingleTickerProviderStateMixi
   TabController _controller;
   List<Tab> tabs = [
     Tab(text: '推荐'),
-    Tab(text: '男生')
+    Tab(text: '音乐')
   ];
 
   @override

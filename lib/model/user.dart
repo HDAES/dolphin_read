@@ -1,8 +1,8 @@
 /*
- * @Descripttion: 
+ * @Descripttion:  用户实体类
  * @Author: Hades
  * @Date: 2020-08-14 09:26:36
- * @LastEditTime: 2020-10-14 14:24:06
+ * @LastEditTime: 2020-10-16 17:27:37
  */
 class UserModel {
   int code;
