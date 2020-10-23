@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-12 22:12:54
- * @LastEditTime: 2020-10-15 15:56:24
+ * @LastEditTime: 2020-10-23 11:02:13
  */
 import 'dart:math';
 
@@ -52,11 +52,11 @@ class _MePageState extends State<MePage> {
   void signOut(){
     StorageUtil().remove(STORAGE_USER_PROFILE_KEY);
     Toast.show('退出成功！');
-    Routes.navigateTo(context, Routes.login);
+    Routes.navigateTo(context, Routes.login,clear: true);
     HttpUtil().clearCache();
     Global.profile=UserModel();
   }
-}
+}  
 
 class UserHeaderWidget extends StatelessWidget {
   @override
