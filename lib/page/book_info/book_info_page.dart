@@ -2,17 +2,18 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-07 20:55:25
- * @LastEditTime: 2020-10-14 21:55:03
+ * @LastEditTime: 2020-10-28 11:27:12
  */
 
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
+import 'package:dolphin_read/global.dart';
+import 'package:dolphin_read/model/book_info.dart';
 import 'package:dolphin_read/model/book_tags.dart';
 import 'package:dolphin_read/page/user_config/user_select_tag_page.dart';
 import 'package:dolphin_read/routers/routes.dart';
 import 'package:flutter/material.dart';
-
 import '../../common/utils/screen.dart';
 
 class BookInfoPage extends StatefulWidget {
@@ -25,7 +26,8 @@ class BookInfoPage extends StatefulWidget {
 class _BookInfoPageState extends State<BookInfoPage> {
 
   var  _futureBuilderFuture;
-  bool isHave;
+  bool updateStatus = true;
+  BookInfoModel bookInfo;
    @override
   void initState() {
     
@@ -42,7 +44,6 @@ class _BookInfoPageState extends State<BookInfoPage> {
           future: _futureBuilderFuture,
           builder: (BuildContext context, AsyncSnapshot snapshot){
             if (snapshot.hasData) {
-              isHave = snapshot.data.data.have;
               return Stack(
                 children: <Widget>[
                   ListView(
@@ -96,37 +97,71 @@ class _BookInfoPageState extends State<BookInfoPage> {
                   ),
                   Positioned(
                     bottom: 0,
-                    height: duSetWidth(100),
-                    child: Row(
-                      children: <Widget>[
-                        GestureDetector(
-                          onTap: (){ rightTap(context,snapshot.data.data);},
-                          child: Container(
+                    width: duSetWidth(750),
+                    child: Container(
+                      color: Global.light?Theme.of(context).primaryColor:Colors.white,
+                      padding: EdgeInsets.only(bottom:10,top:10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Container(
                             width: duSetWidth(375),
-                            child: Center(
-                              child:snapshot.data.data.update?Text('更新章节'):Text('无法更新'),
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.blueGrey
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                GestureDetector(
+                                  onTap: (){ lickOnTap();},
+                                  child: Row(
+                                    children: <Widget>[
+                                      Icon(bookInfo.data.follow?Icons.favorite:Icons.favorite_border,
+                                        color: bookInfo.data.follow?Colors.red:Theme.of(context).textTheme.bodyText1.color),
+                                      Text(bookInfo.data.follow?'已收藏':'收藏')
+                                    ],
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: (){ rightTap(context,snapshot.data.data);},
+                                  child: Row(
+                                    children: <Widget>[
+                                      Icon(bookInfo.data.update?Icons.refresh:Icons.report_off),
+                                      Text(bookInfo.data.update?'更新章节':'最新章节')
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: (){
-                            leftTap(context,snapshot.data.data);
-                          },
-                          child: Container(
-                            width: duSetWidth(375),
-                            height: duSetWidth(100),
-                            child: Center(
-                              child: isHave?Text('阅读'):Text('书籍入库'),
+                          
+                          GestureDetector(
+                            onTap: (){
+                              leftTap(context,snapshot.data.data);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                              child: Center(
+                                child:Row(
+                                  children: [
+                                    Icon(bookInfo.data.have?Icons.book:Icons.arrow_downward,color: Colors.white,),
+                                    Text(bookInfo.data.have?'立即阅读':'书籍入库',style: TextStyle(color: Colors.white))
+                                  ],
+                                )
+                              ),
+                              decoration: BoxDecoration(
+                                color: Color(0xFFD24444),
+                                borderRadius: BorderRadius.circular(30),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0.0,16.0),
+                                    color: Color(0xFFD24444),
+                                    blurRadius: 25.0,
+                                    spreadRadius: -15.0
+                                  )
+                                ]
+                              ),
                             ),
-                            decoration: BoxDecoration(
-                              color:  isHave?Color(0xFF33C3A5):Colors.grey
-                            ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
@@ -140,8 +175,17 @@ class _BookInfoPageState extends State<BookInfoPage> {
   }
   
   void rightTap(context,item) async{
-    if(item.update){
-      BookApi.getUpdateBook(context: context,params: {"bookId":item.bookId});
+    if(item.update && updateStatus){
+      setState(() {
+        updateStatus = false;
+        bookInfo.data.update = false;
+      });
+     var response = await  BookApi.getUpdateBook(context: context,params: {"bookId":item.bookId});
+     if(response['code'] == 200){
+        Toast.show(response['message']);
+     }
+    }else{
+      Toast.show('暂不能更新');
     }
   }
 
@@ -157,26 +201,46 @@ class _BookInfoPageState extends State<BookInfoPage> {
             builder: (BuildContext context) {
               return ChoiceTags(bookTags,widget.params,(){
                 setState(() {
-                  isHave = true;
+                  bookInfo.data.have = true;
                 });
               });
           }
         );
       }
   }
-  
+
+  //收藏按钮
+  lickOnTap() async{
+    var response = await UserApi.postFollow(context:context,params: {
+      "bookId":widget.params['bookId'][0],
+    });
+    if(response['code']==200){
+      Toast.show(bookInfo.data.follow?'取消收藏':'已收藏');
+      setState(() {
+        bookInfo.data.follow = !bookInfo.data.follow;
+      });
+    }
+  }
+
  
-  //请求书籍详情
-  Future getBookInfo(context) async{
-    print(widget.params['bookId'][0]);
-    return  BookApi.getBookInfo(context: context,
+//请求书籍详情
+Future getBookInfo(context) async{
+    BookInfoModel info = await  BookApi.getBookInfo(context: context,
       params: {
         "bookId":widget.params['bookId'][0],
         "type":widget.params['type'][0]
         }
       );
+      
+      setState(() {
+        bookInfo = info;
+      });
+      return info;
   }
 }
+
+
+
 
 class ChoiceTags extends StatefulWidget {
   final BookTagsModel bookTags;

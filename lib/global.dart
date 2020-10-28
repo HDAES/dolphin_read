@@ -2,13 +2,14 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-14 09:26:36
- * @LastEditTime: 2020-10-15 14:01:06
+ * @LastEditTime: 2020-10-28 13:17:32
  */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/values/values.dart';
 import 'package:dolphin_read/model/user.dart';
 import 'package:flutter/material.dart';
 
+import 'common/apis/apis.dart';
 import 'common/utils/storage.dart';
 
 class Global {
@@ -43,6 +44,8 @@ class Global {
     if (_profileJSON != null) {
       profile = UserModel.fromJson(_profileJSON);
       isOfflineLogin = true;
+
+      
     }
 
 
@@ -56,4 +59,5 @@ class Global {
       fontSzie = _fontSzie;
     } 
   }
+
 }

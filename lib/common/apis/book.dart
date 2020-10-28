@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-09 14:19:46
- * @LastEditTime: 2020-08-18 12:09:12
+ * @LastEditTime: 2020-10-28 13:22:14
  */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/model/book_catalog.dart';

@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-07 20:55:25
- * @LastEditTime: 2020-08-18 16:53:41
+ * @LastEditTime: 2020-10-28 13:28:07
  */
 import 'package:dolphin_read/common/utils/utils.dart';
 import 'package:dolphin_read/common/values/values.dart';
@@ -57,5 +57,17 @@ class UserApi{
       refresh: true
     );
     return FollowsModel.fromJson(response);
+  }
+
+  //刷新Token
+  static Future getRefresh({@required BuildContext context}) async {
+    var response  = await HttpUtil().get(
+      '/api/user/token/refresh', 
+      context: context);
+      if(response['code'] == 200){
+        Global.profile.data.authorization = response['data']['authorization'];
+        StorageUtil().setJSON(STORAGE_USER_PROFILE_KEY, Global.profile);
+      }
+      print(response);
   }
 }

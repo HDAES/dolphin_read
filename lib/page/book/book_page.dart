@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-09 14:19:46
- * @LastEditTime: 2020-08-18 18:38:55
+ * @LastEditTime: 2020-10-23 13:07:50
  */
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/utils/utils.dart';
@@ -69,7 +69,7 @@ class _BookPageState extends State<BookPage> {
                 key: _innerDrawerKey,
                 onTapClose: _onTapToClose,
                 swipe: true,
-                leftChild: BookCatalogPage(bookId,switchChapter,chapterId,bookData.idx), // required if rightChild is not set
+                leftChild: BookCatalogPage(bookId,switchChapter,chapterId,bookData.idx,), 
                 scaffold: Scaffold(
                     backgroundColor: ColorsUtil.getBodyColor(),
                     body: Stack(

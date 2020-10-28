@@ -77,6 +77,7 @@ class _SearchPageState extends State<SearchPage> {
           },
           child: Icon(
             Icons.menu,
+            color: Theme.of(context).textTheme.bodyText1.color,
           ),
         ),
       ),

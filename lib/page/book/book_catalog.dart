@@ -2,10 +2,11 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-09 14:19:46
- * @LastEditTime: 2020-08-18 16:05:53
+ * @LastEditTime: 2020-10-23 11:29:53
  */
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
+import 'package:dolphin_read/global.dart';
 import 'package:dolphin_read/model/book_catalog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';

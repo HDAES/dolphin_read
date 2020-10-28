@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-14 12:47:01
- * @LastEditTime: 2020-10-15 14:50:36
+ * @LastEditTime: 2020-10-28 13:16:26
  */
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/utils/utils.dart';
@@ -107,16 +107,20 @@ class _RecommendPageState extends State<RecommendPage> with AutomaticKeepAliveCl
         },
         child: Icon(
           Icons.vertical_align_top,
+          color: Colors.white,
         ),
       ):FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
         heroTag: 'homeFab',
         key: ValueKey(Icons.search),
         onPressed: () {
+           
           Routes.navigateTo(context, Routes.search);
           //Upgrade.init(context);
         },
         child: Icon(
           Icons.search,
+          color: Colors.white,
         ),
       ),
     );

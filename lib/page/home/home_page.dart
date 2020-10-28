@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Hades
  * @Date: 2020-08-03 22:24:01
- * @LastEditTime: 2020-10-16 17:28:17
+ * @LastEditTime: 2020-10-28 13:16:55
  */
 import 'package:dolphin_read/common/apis/apis.dart';
 import 'package:dolphin_read/common/widgets/widgets.dart';
@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage>  with SingleTickerProviderStateMixi
   void initState() {
     _controller = TabController(length: tabs.length, vsync: this);
     super.initState();
+    
   }
   @override
   void dispose() {
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage>  with SingleTickerProviderStateMixi
   @override
   Widget build(BuildContext context) {
     super.build(context);
+   
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -62,10 +64,6 @@ class _HomePageState extends State<HomePage>  with SingleTickerProviderStateMixi
           ),
         ),
       );
-   
-  }
-  Future getBanner(context) async{
-    return  IndexApi.getIndexBanner(context: null);
   }
 }
 
